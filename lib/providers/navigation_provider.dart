@@ -6,6 +6,9 @@ class NavigationProvider extends ChangeNotifier {
   int _selectedIndex = 0;
   int get selectedIndex => _selectedIndex;
 
+  bool _navigationDrawerIsCollapsed = true;
+  bool get navigationDrawerIsCollapsed => _navigationDrawerIsCollapsed;
+
   void toggleIsCollapsed() {
     _isCollapsed = !_isCollapsed;
     notifyListeners();
@@ -13,6 +16,11 @@ class NavigationProvider extends ChangeNotifier {
 
   void setSelectedIndex(int index) {
     _selectedIndex = index;
+    notifyListeners();
+  }
+
+  void toggleNavigationDrawerIsCollapsed() {
+    _navigationDrawerIsCollapsed = !_navigationDrawerIsCollapsed;
     notifyListeners();
   }
 }

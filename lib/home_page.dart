@@ -9,6 +9,8 @@ import 'package:motorparts_marketplace/models/navigation_item.dart';
 import 'package:motorparts_marketplace/test_screen.dart';
 import 'package:motorparts_marketplace/providers/navigation_provider.dart';
 import 'package:motorparts_marketplace/principal_screen.dart';
+import 'package:motorparts_marketplace/widgets/build_item_bottom_nav_bar.dart';
+import 'package:motorparts_marketplace/widgets/navigation_drawer_widget.dart';
 import 'package:provider/provider.dart';
 
 class MyHomePage extends StatefulWidget {
@@ -77,6 +79,7 @@ class _MyHomePageState extends State<MyHomePage> {
       extendBody: true,
       backgroundColor: Colors.white.withOpacity(0.95),
       body: screens[selectedIndex],
+      drawer: NavigationDrawerWidget(navigationProvider: navProv),
       //floatingActionButton: isCollapsed ? null : null,
       //floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       bottomNavigationBar: Padding(
@@ -121,16 +124,27 @@ class ButtonNavBar extends StatelessWidget {
       width: height,
       //padding: const EdgeInsets.only(left: 10, right: 10),
       decoration: BoxDecoration(
-        color: Colors.black.withOpacity(0.25),
-        borderRadius: BorderRadius.circular(10),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.1),
-            blurRadius: 10,
-            spreadRadius: 5,
+          boxShadow: [
+            const BoxShadow(
+              color: Colors.white54,
+              offset: Offset(-2.5, -2.5),
+              blurRadius: 2.0,
+              spreadRadius: 0.5,
+            ),
+            BoxShadow(
+              color: Colors.grey.shade500,
+              offset: const Offset(2.5, 2.5),
+              blurRadius: 2.0,
+              spreadRadius: 0.5,
+            ),
+          ],
+          borderRadius: const BorderRadius.only(
+            topLeft: Radius.circular(15.0),
+            topRight: Radius.circular(15.0),
+            bottomLeft: Radius.circular(15.0),
+            bottomRight: Radius.circular(15.0),
           ),
-        ],
-      ),
+          color: Colors.grey[300]),
       child: IconButton(
         icon: const Icon(
           Icons.add,
@@ -165,40 +179,47 @@ class BottomNavBar extends StatelessWidget {
       height: height,
       padding: const EdgeInsets.only(left: 10, right: 10),
       decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(10),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.1),
-            blurRadius: 10,
-            spreadRadius: 5,
+          boxShadow: [
+            const BoxShadow(
+              color: Colors.white54,
+              offset: Offset(-2.5, -2.5),
+              blurRadius: 2.0,
+              spreadRadius: 0.5,
+            ),
+            BoxShadow(
+              color: Colors.grey.shade500,
+              offset: const Offset(2.5, 2.5),
+              blurRadius: 2.0,
+              spreadRadius: 0.5,
+            ),
+          ],
+          borderRadius: const BorderRadius.only(
+            topLeft: Radius.circular(15.0),
+            topRight: Radius.circular(15.0),
+            bottomLeft: Radius.circular(15.0),
+            bottomRight: Radius.circular(15.0),
           ),
-        ],
-      ),
+          color: Colors.grey[300]),
       child: Center(
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             ...listNavItems
                 .map(
-                  (i) => GestureDetector(
-                    onTap: () {
-                      if (Platform.isAndroid) {
-                        HapticFeedback.vibrate();
-                      }
-                      if (Platform.isIOS) {
-                        HapticFeedback.lightImpact();
-                      }
-                      navigationProvider.setSelectedIndex(i.index);
-                      navigationProvider.toggleIsCollapsed();
-                    },
-                    child: Container(
-                      child: i.icon,
-                      color: Colors.red,
-                      height: 50,
-                      width: 50,
-                    ),
-                  ),
+                  (i) => InkWell(
+                      onTap: () {
+                        if (Platform.isAndroid) {
+                          HapticFeedback.vibrate();
+                        }
+                        if (Platform.isIOS) {
+                          HapticFeedback.lightImpact();
+                        }
+                        navigationProvider.setSelectedIndex(i.index);
+                        navigationProvider.toggleIsCollapsed();
+                      },
+                      child: BuildNavItem(
+                        icon: i.icon,
+                      )),
                 )
                 .toList(),
           ],

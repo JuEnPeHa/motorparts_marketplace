@@ -18,6 +18,9 @@ class AppTheme {
       // FloatingActionButtons
       floatingActionButtonTheme: const FloatingActionButtonThemeData(
           backgroundColor: primary, elevation: 5),
+      backgroundColor: Colors.blueGrey.shade200,
+      scaffoldBackgroundColor: Colors.blueGrey.shade200,
+      dialogBackgroundColor: Colors.blueGrey.shade200,
 
       // ElevatedButtons
       elevatedButtonTheme: ElevatedButtonThemeData(
