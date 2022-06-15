@@ -112,6 +112,7 @@ class PrincipalScreen extends StatelessWidget {
                         _isIOs()
                             ? CupertinoPageRoute(
                                 builder: (context) => ArticleDetails(
+                                  isIOS: _isIOs(),
                                   title: '',
                                   api: '',
                                   image: _buildImage(index),
@@ -120,6 +121,7 @@ class PrincipalScreen extends StatelessWidget {
                               )
                             : MaterialPageRoute(
                                 builder: (context) => ArticleDetails(
+                                  isIOS: _isIOs(),
                                   title: '',
                                   api: '',
                                   image: _buildImage(index),
