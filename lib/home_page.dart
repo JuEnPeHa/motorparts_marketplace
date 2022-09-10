@@ -214,7 +214,7 @@ class BottomNavBar extends StatelessWidget {
                         if (Platform.isIOS) {
                           HapticFeedback.lightImpact();
                         }
-                        navigationProvider.setSelectedIndex(i.index);
+                        navigationProvider.selectedIndex = (i.index);
                         navigationProvider.toggleIsCollapsed();
                       },
                       child: BuildNavItem(
