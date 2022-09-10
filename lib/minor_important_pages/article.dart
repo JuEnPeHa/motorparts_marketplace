@@ -3,7 +3,7 @@ import 'package:flutter/cupertino.dart';
 class ArticleDetails extends StatelessWidget {
   const ArticleDetails(
       {Key? key,
-        required this.isIOS,
+      required this.isIOS,
       required this.title,
       required this.price,
       required this.api,
@@ -18,16 +18,17 @@ class ArticleDetails extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CupertinoPageScaffold(
-      child: Center(child: Column(
+      child: Center(
+          child: Column(
         //crossAxisAlignment: CrossAxisAlignment.end,
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
           image,
-          !isIOS ? Text("Es IOS") : Text("Es Android"),
-          !isIOS ? Text("Es IOS") : Text("Es Android"),
-          !isIOS ? Text("Es IOS") : Text("Es Android"),
-          !isIOS ? Text("Es IOS") : Text("Es Android"),
-          !isIOS ? Text("Es IOS") : Text("Es Android"),
+          isIOS ? Text("Es IOS") : Text("Es Android"),
+          isIOS ? Text("Es IOS") : Text("Es Android"),
+          isIOS ? Text("Es IOS") : Text("Es Android"),
+          isIOS ? Text("Es IOS") : Text("Es Android"),
+          isIOS ? Text("Es IOS") : Text("Es Android"),
         ],
       )),
     );
