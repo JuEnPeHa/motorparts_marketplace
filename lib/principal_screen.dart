@@ -36,27 +36,21 @@ class PrincipalScreen extends StatelessWidget {
           title: const Text('Página Principal'),
           floating: true,
           snap: true,
-          backgroundColor: Colors.red,
-          expandedHeight: 100,
-          flexibleSpace: SafeArea(
-            child: FlexibleSpaceBar(
-              background: Center(
-                child: Container(
-                  color: Colors.red,
-                  child: const Text(
-                    'Aquí un deslizable de fotos',
-                    style: TextStyle(
-                      fontSize: 20,
-                    ),
-                  ),
-                ),
-              ),
-            ),
-          ),
+          scrolledUnderElevation: 0,
+          stretch: true,
+          backgroundColor: Colors.deepPurple.withOpacity(0.75),
+          expandedHeight: MediaQuery.of(context).size.height * 0.05,
         ),
         SliverToBoxAdapter(
           child: Container(
-            color: Colors.red,
+            decoration: BoxDecoration(
+              color: Colors.deepPurple.withOpacity(0.75),
+              borderRadius: BorderRadius.only(
+                bottomLeft: Radius.circular(15),
+                bottomRight: Radius.circular(15),
+              ),
+            ),
+            //color: Colors.deepPurple.withOpacity(0.75),
             child: Padding(
               padding: const EdgeInsets.all(10),
               child: ClipRRect(
@@ -64,7 +58,7 @@ class PrincipalScreen extends StatelessWidget {
                 child: Container(
                   height: 200,
                   width: MediaQuery.of(context).size.width * 0.90,
-                  color: Colors.red.withOpacity(0.25),
+                  color: Colors.purple.withOpacity(0.25),
                   child: Swiper(
                       autoplay: false,
                       autoplayDisableOnInteraction: true,
