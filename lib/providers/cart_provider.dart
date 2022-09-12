@@ -119,14 +119,25 @@ class CartProvider extends ChangeNotifier {
 
   void removeSingleQuantity(ItemInCart item) {
     bool shouldRemove = false;
-    _items.forEach((itemInCart) {
-      if (itemInCart.id == item.id) {
-        itemInCart.quantity--;
-        if (itemInCart.quantity == 0) {
+
+    for (var i = 0; i < _items.length; i++) {
+      if (_items[i].id == item.id) {
+        if (_items[i].quantity > 1) {
+          _items[i].quantity--;
+        } else {
+          _items[i].quantity--;
           shouldRemove = true;
         }
       }
-    });
+    }
+    // _items.forEach((itemInCart) {
+    //   if (itemInCart.id == item.id) {
+    //     itemInCart.quantity--;
+    //     if (itemInCart.quantity == 0) {
+    //       shouldRemove = true;
+    //     }
+    //   }
+    // });
     if (shouldRemove) {
       removeItem(item);
     }
