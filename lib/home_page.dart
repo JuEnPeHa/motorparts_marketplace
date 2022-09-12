@@ -3,9 +3,11 @@ import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:motorparts_marketplace/busqueda_screen.dart';
 import 'package:motorparts_marketplace/cart_screen.dart';
 import 'package:motorparts_marketplace/minor_important_pages/contact.dart';
 import 'package:motorparts_marketplace/models/navigation_item.dart';
+import 'package:motorparts_marketplace/profile_screen.dart';
 import 'package:motorparts_marketplace/test_screen.dart';
 import 'package:motorparts_marketplace/providers/navigation_provider.dart';
 import 'package:motorparts_marketplace/principal_screen.dart';
@@ -41,10 +43,10 @@ class _MyHomePageState extends State<MyHomePage> {
   ];
   static List<Widget> _screens() => [
         PrincipalScreen(),
-        TestScreen(),
+        BusquedaScreen(),
         Contact(),
         CartScreen(),
-        PrincipalScreen(),
+        ProfileScreen(),
       ];
   static final List<Widget> screens = _screens();
   static List<NavigationItem> navigationItems = [
@@ -94,7 +96,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 //width: MediaQuery.of(context).size.width,
                 height: MediaQuery.of(context).size.height * 0.075,
                 toggle: () {
-                  navProv.toggleIsCollapsed();
+                  //navProv.toggleIsCollapsed();
                 },
               )
             : BottomNavBar(
@@ -215,7 +217,7 @@ class BottomNavBar extends StatelessWidget {
                           HapticFeedback.lightImpact();
                         }
                         navigationProvider.selectedIndex = (i.index);
-                        navigationProvider.toggleIsCollapsed();
+                        //navigationProvider.toggleIsCollapsed();
                       },
                       child: BuildNavItem(
                         icon: i.icon,
