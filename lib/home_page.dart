@@ -79,7 +79,7 @@ class _MyHomePageState extends State<MyHomePage> {
     final bool isCollapsed = navProv.isCollapsed;
     return Scaffold(
       extendBody: true,
-      backgroundColor: Colors.white.withOpacity(0.95),
+      //backgroundColor: Colors.white.withOpacity(0.95),
       body: screens[selectedIndex],
       drawer: NavigationDrawerWidget(navigationProvider: navProv),
       //floatingActionButton: isCollapsed ? null : null,

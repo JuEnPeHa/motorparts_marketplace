@@ -38,13 +38,13 @@ class PrincipalScreen extends StatelessWidget {
           snap: true,
           scrolledUnderElevation: 0,
           stretch: true,
-          backgroundColor: Colors.deepPurple.withOpacity(0.75),
+          backgroundColor: Theme.of(context).primaryColor.withOpacity(0.80),
           expandedHeight: MediaQuery.of(context).size.height * 0.05,
         ),
         SliverToBoxAdapter(
           child: Container(
             decoration: BoxDecoration(
-              color: Colors.deepPurple.withOpacity(0.75),
+              color: Theme.of(context).primaryColor.withOpacity(0.80),
               borderRadius: BorderRadius.only(
                 bottomLeft: Radius.circular(15),
                 bottomRight: Radius.circular(15),
@@ -58,7 +58,7 @@ class PrincipalScreen extends StatelessWidget {
                 child: Container(
                   height: 200,
                   width: MediaQuery.of(context).size.width * 0.90,
-                  color: Colors.purple.withOpacity(0.25),
+                  //color: Colors.purple.withOpacity(0.25),
                   child: Swiper(
                       autoplay: false,
                       autoplayDisableOnInteraction: true,
@@ -126,18 +126,28 @@ class PrincipalScreen extends StatelessWidget {
                     },
                     child: Container(
                       alignment: Alignment.center,
-                      color: Colors.teal[100 * (index % 9)],
+                      color: Theme.of(context).cardColor.withOpacity(0.25),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Text('Item $index'),
                           SizedBox(
-                            height: MediaQuery.of(context).size.width * 0.35,
-                            width: MediaQuery.of(context).size.width * 0.35,
+                            height: MediaQuery.of(context).size.width * 0.30,
+                            width: MediaQuery.of(context).size.width * 0.45,
                             //width: MediaQuery.of(context).size.width / 2,
                             child: _buildImage(index),
                           ),
-                          Text('Precio del artículo \$$index'),
+                          Text(
+                            'Item $index',
+                            maxLines: 2,
+                            softWrap: true,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                          Text(
+                            'Precio del artículo \$$index',
+                            maxLines: 2,
+                            softWrap: true,
+                            overflow: TextOverflow.ellipsis,
+                          ),
                         ],
                       ),
                     ),
