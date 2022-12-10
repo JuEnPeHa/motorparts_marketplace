@@ -230,7 +230,7 @@ Widget _buildPasswordTF() {
 Widget _buildForgotPasswordBtn() {
   return Container(
     alignment: Alignment.centerRight,
-    child: FilledButton(
+    child: TextButton(
       onPressed: () => print('Forgot Password Button Pressed'),
       style: ButtonStyle(
         backgroundColor: MaterialStateProperty.all(Colors.transparent),

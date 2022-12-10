@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:motorparts_marketplace/pages/auth_pages/register_page.dart';
 
 class LoginPage extends StatelessWidget {
   const LoginPage({super.key});
@@ -55,12 +56,12 @@ class LoginPage extends StatelessWidget {
                       height: 30.0,
                     ),
                     _buildPasswordTF(),
-                    _buildForgotPasswordBtn(),
-                    _buildRememberMeCheckbox(),
-                    _buildLoginBtn(),
-                    _buildSignInWithText(),
-                    _buildSocialBtnRow(),
-                    _buildSignupBtn(),
+                    _BuildForgotPasswordBtn(),
+                    _BuildRememberMeCheckbox(),
+                    _BuildLoginBtn(),
+                    _BuildSignInWithText(),
+                    _BuildSocialBtnRow(),
+                    _BuildSignupBtn(),
                   ],
                 ),
               ),
@@ -172,183 +173,233 @@ Widget _buildPasswordTF() {
   );
 }
 
-//_buildForgotPasswordBtn
-Widget _buildForgotPasswordBtn() {
-  return Container(
-    alignment: Alignment.centerRight,
-    child: FilledButton(
-      onPressed: () => print('Forgot Password Button Pressed'),
-      style: ButtonStyle(
-        backgroundColor: MaterialStateProperty.all(Colors.transparent),
-        padding: MaterialStateProperty.all(EdgeInsets.only(right: 0.0)),
-      ),
-      child: Text(
-        'Forgot Password?',
-        style: TextStyle(
-          color: Colors.white,
-          fontFamily: 'OpenSans',
-        ),
-      ),
-    ),
-  );
-}
+// _BuildForgotPasswordBtn
+class _BuildForgotPasswordBtn extends StatelessWidget {
+  const _BuildForgotPasswordBtn({super.key});
 
-//_buildRememberMeCheckbox
-Widget _buildRememberMeCheckbox() {
-  return Container(
-    height: 20.0,
-    child: Row(
-      children: [
-        Theme(
-          data: ThemeData(unselectedWidgetColor: Colors.white),
-          child: Checkbox(
-            value: true,
-            checkColor: Colors.green,
-            activeColor: Colors.white,
-            onChanged: (value) {},
-          ),
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      alignment: Alignment.centerRight,
+      child: TextButton(
+        onPressed: () => print('Forgot Password Button Pressed'),
+        style: ButtonStyle(
+          backgroundColor: MaterialStateProperty.all(Colors.transparent),
+          padding: MaterialStateProperty.all(EdgeInsets.only(right: 0.0)),
         ),
-        Text(
-          'Remember me',
+        child: Text(
+          'Forgot Password?',
           style: TextStyle(
             color: Colors.white,
+            fontFamily: 'OpenSans',
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+// _BuildRememberMeCheckbox
+class _BuildRememberMeCheckbox extends StatelessWidget {
+  const _BuildRememberMeCheckbox({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: 20.0,
+      child: Row(
+        children: [
+          Theme(
+            data: ThemeData(unselectedWidgetColor: Colors.white),
+            child: Checkbox(
+              value: true,
+              checkColor: Colors.green,
+              activeColor: Colors.white,
+              onChanged: (value) {},
+            ),
+          ),
+          Text(
+            'Remember me',
+            style: TextStyle(
+              color: Colors.white,
+              fontWeight: FontWeight.bold,
+              fontFamily: 'OpenSans',
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+// _BuildLoginBtn
+class _BuildLoginBtn extends StatelessWidget {
+  const _BuildLoginBtn({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.symmetric(vertical: 25.0),
+      width: double.infinity,
+      child: ElevatedButton(
+        onPressed: () => print('Login Button Pressed'),
+        style: ElevatedButton.styleFrom(
+          primary: Colors.white,
+          onPrimary: Colors.black,
+          shadowColor: Colors.black,
+          elevation: 5,
+          padding: EdgeInsets.all(15.0),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(30.0),
+          ),
+        ),
+        child: Text(
+          'LOGIN',
+          style: TextStyle(
+            color: Color(0xFF527DAA),
+            letterSpacing: 1.5,
+            fontSize: 18.0,
             fontWeight: FontWeight.bold,
             fontFamily: 'OpenSans',
           ),
         ),
-      ],
-    ),
-  );
+      ),
+    );
+  }
 }
 
-//_buildLoginBtn
-Widget _buildLoginBtn() {
-  return Container(
-    padding: EdgeInsets.symmetric(vertical: 25.0),
-    width: double.infinity,
-    child: ElevatedButton(
-      onPressed: () => print('Login Button Pressed'),
-      style: ElevatedButton.styleFrom(
-        primary: Colors.white,
-        onPrimary: Colors.black,
-        shadowColor: Colors.black,
-        elevation: 5,
-        padding: EdgeInsets.all(15.0),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(30.0),
-        ),
-      ),
-      child: Text(
-        'LOGIN',
-        style: TextStyle(
-          color: Color(0xFF527DAA),
-          letterSpacing: 1.5,
-          fontSize: 18.0,
-          fontWeight: FontWeight.bold,
-          fontFamily: 'OpenSans',
-        ),
-      ),
-    ),
-  );
-}
+// _BuildSignInWithText
+class _BuildSignInWithText extends StatelessWidget {
+  const _BuildSignInWithText({
+    super.key,
+  });
 
-//_buildSignInWithText
-Widget _buildSignInWithText() {
-  return Column(
-    children: [
-      Text(
-        '- OR -',
-        style: TextStyle(
-          color: Colors.white,
-          fontWeight: FontWeight.w400,
-        ),
-      ),
-      SizedBox(height: 20.0),
-      Text(
-        'Sign in with',
-        style: TextStyle(
-          color: Colors.white,
-          fontFamily: 'OpenSans',
-        ),
-      ),
-    ],
-  );
-}
-
-//_buildSocialBtnRow
-Widget _buildSocialBtnRow() {
-  return Padding(
-    padding: EdgeInsets.symmetric(vertical: 30.0),
-    child: Row(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+  @override
+  Widget build(BuildContext context) {
+    return Column(
       children: [
-        _buildSocialBtn(
-          () => print('Login with Facebook'),
-          AssetImage(
-            'assets/logos/facebook.jpg',
+        Text(
+          '- OR -',
+          style: TextStyle(
+            color: Colors.white,
+            fontWeight: FontWeight.w400,
           ),
         ),
-        _buildSocialBtn(
-          () => print('Login with Google'),
-          AssetImage(
-            'assets/logos/google.jpg',
+        SizedBox(height: 20.0),
+        Text(
+          'Sign in with',
+          style: TextStyle(
+            color: Colors.white,
+            fontFamily: 'OpenSans',
           ),
         ),
       ],
-    ),
-  );
+    );
+  }
 }
 
-//_buildSocialBtn
-Widget _buildSocialBtn(Function onTap, AssetImage logo) {
-  return GestureDetector(
-    onTap: () => onTap,
-    child: Container(
-      height: 60.0,
-      width: 60.0,
-      decoration: BoxDecoration(
-        shape: BoxShape.circle,
-        color: Colors.white,
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black26,
-            offset: Offset(0, 2),
-            blurRadius: 6.0,
+// _BuildSocialBtnRow
+class _BuildSocialBtnRow extends StatelessWidget {
+  const _BuildSocialBtnRow({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: EdgeInsets.symmetric(vertical: 30.0),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          _BuildSocialBtn(
+            onTap: () => print('Login with Facebook'),
+            logo: AssetImage(
+              'assets/logos/facebook.jpg',
+            ),
+          ),
+          _BuildSocialBtn(
+            onTap: () => print('Login with Google'),
+            logo: AssetImage(
+              'assets/logos/google.jpg',
+            ),
           ),
         ],
-        image: DecorationImage(
-          image: logo,
+      ),
+    );
+  }
+}
+
+// _BuildSocialBtn
+class _BuildSocialBtn extends StatelessWidget {
+  final Function? onTap;
+  final AssetImage logo;
+  const _BuildSocialBtn({
+    super.key,
+    this.onTap,
+    required this.logo,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () => onTap,
+      child: Container(
+        height: 60.0,
+        width: 60.0,
+        decoration: BoxDecoration(
+          shape: BoxShape.circle,
+          color: Colors.white,
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black26,
+              offset: Offset(0, 2),
+              blurRadius: 6.0,
+            ),
+          ],
+          image: DecorationImage(
+            image: logo,
+          ),
         ),
       ),
-    ),
-  );
+    );
+  }
 }
 
-//_buildSignupBtn
-Widget _buildSignupBtn() {
-  return GestureDetector(
-    onTap: () => print('Sign Up Button Pressed'),
-    child: RichText(
-      text: TextSpan(
-        children: [
-          TextSpan(
-            text: 'Don\'t have an Account? ',
-            style: TextStyle(
-              color: Colors.white,
-              fontSize: 18.0,
-              fontWeight: FontWeight.w400,
-            ),
+//_BuildSignupBtn
+class _BuildSignupBtn extends StatelessWidget {
+  const _BuildSignupBtn({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () {
+        print('Sign Up Button Pressed');
+        Navigator.of(context).push(
+          MaterialPageRoute(
+            builder: (context) => RegisterPage(),
           ),
-          TextSpan(
-            text: 'Sign Up',
-            style: TextStyle(
-              color: Colors.white,
-              fontSize: 18.0,
-              fontWeight: FontWeight.bold,
+        );
+      },
+      child: RichText(
+        text: TextSpan(
+          children: [
+            TextSpan(
+              text: 'Don\'t have an Account? ',
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 18.0,
+                fontWeight: FontWeight.w400,
+              ),
             ),
-          ),
-        ],
+            TextSpan(
+              text: 'Sign Up',
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 18.0,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ],
+        ),
       ),
-    ),
-  );
+    );
+  }
 }
