@@ -1,42 +1,42 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 
+//The height of the Register Page is 2/3 of the screen
 class RegisterPage extends StatelessWidget {
   const RegisterPage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        Container(
-          height: double.infinity,
-          child: SingleChildScrollView(
-            physics: AlwaysScrollableScrollPhysics(),
-            padding: EdgeInsets.symmetric(
-              horizontal: 40.0,
-              vertical: 120.0,
+    final Size size = MediaQuery.of(context).size;
+    return Container(
+      color: Colors.blue,
+      height: size.height / 3 * 2,
+      child: SingleChildScrollView(
+        physics: const AlwaysScrollableScrollPhysics(),
+        padding: const EdgeInsets.symmetric(
+          horizontal: 40.0,
+          vertical: 0.0,
+        ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            _buildNameTF(),
+            const SizedBox(
+              height: 8.0,
             ),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                _buildNameTF(),
-                SizedBox(
-                  height: 30.0,
-                ),
-                _buildEmailTF(),
-                SizedBox(
-                  height: 30.0,
-                ),
-                _buildPasswordTF(),
-                _buildForgotPasswordBtn(),
-                _buildRememberMeCheckbox(),
-                _buildLoginBtn(),
-              ],
+            _buildEmailTF(),
+            const SizedBox(
+              height: 8.0,
             ),
-          ),
-        )
-      ],
+            _buildPasswordTF(),
+            _buildForgotPasswordBtn(),
+            _buildRememberMeCheckbox(),
+            _BuildRegisterBtn(),
+          ],
+        ),
+      ),
     );
   }
 }
@@ -46,7 +46,7 @@ Widget _buildNameTF() {
   return Column(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
-      Text(
+      const Text(
         'Name',
         style: TextStyle(
           color: Colors.white,
@@ -54,14 +54,14 @@ Widget _buildNameTF() {
           fontFamily: 'OpenSans',
         ),
       ),
-      SizedBox(height: 10.0),
+      const SizedBox(height: 10.0),
       Container(
         alignment: Alignment.centerLeft,
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(10.0),
           boxShadow: [
-            BoxShadow(
+            const BoxShadow(
               color: Colors.black26,
               blurRadius: 6.0,
               offset: Offset(0, 2),
@@ -69,7 +69,7 @@ Widget _buildNameTF() {
           ],
         ),
         height: 60.0,
-        child: TextField(
+        child: const TextField(
           keyboardType: TextInputType.emailAddress,
           style: TextStyle(
             color: Colors.black87,
@@ -97,7 +97,7 @@ Widget _buildEmailTF() {
   return Column(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
-      Text(
+      const Text(
         'Email',
         style: TextStyle(
           color: Colors.white,
@@ -105,14 +105,14 @@ Widget _buildEmailTF() {
           fontFamily: 'OpenSans',
         ),
       ),
-      SizedBox(height: 10.0),
+      const SizedBox(height: 10.0),
       Container(
         alignment: Alignment.centerLeft,
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(10.0),
           boxShadow: [
-            BoxShadow(
+            const BoxShadow(
               color: Colors.black26,
               blurRadius: 6.0,
               offset: Offset(0, 2),
@@ -120,7 +120,7 @@ Widget _buildEmailTF() {
           ],
         ),
         height: 60.0,
-        child: TextField(
+        child: const TextField(
           keyboardType: TextInputType.emailAddress,
           style: TextStyle(
             color: Colors.black87,
@@ -148,7 +148,7 @@ Widget _buildPasswordTF() {
   return Column(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
-      Text(
+      const Text(
         'Password',
         style: TextStyle(
           color: Colors.white,
@@ -156,14 +156,14 @@ Widget _buildPasswordTF() {
           fontFamily: 'OpenSans',
         ),
       ),
-      SizedBox(height: 10.0),
+      const SizedBox(height: 10.0),
       Container(
         alignment: Alignment.centerLeft,
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(10.0),
           boxShadow: [
-            BoxShadow(
+            const BoxShadow(
               color: Colors.black26,
               blurRadius: 6.0,
               offset: Offset(0, 2),
@@ -171,7 +171,7 @@ Widget _buildPasswordTF() {
           ],
         ),
         height: 60.0,
-        child: TextField(
+        child: const TextField(
           obscureText: true,
           style: TextStyle(
             color: Colors.black87,
@@ -205,9 +205,9 @@ Widget _buildForgotPasswordBtn() {
         shape: MaterialStateProperty.all(RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(30.0),
         )),
-        padding: MaterialStateProperty.all(EdgeInsets.only(right: 0.0)),
+        padding: MaterialStateProperty.all(const EdgeInsets.only(right: 0.0)),
       ),
-      child: Text(
+      child: const Text(
         'Forgot Password?',
         style: TextStyle(
           color: Colors.white,
@@ -234,7 +234,7 @@ Widget _buildRememberMeCheckbox() {
             onChanged: (value) {},
           ),
         ),
-        Text(
+        const Text(
           'Remember me',
           style: TextStyle(
             color: Colors.white,
@@ -247,49 +247,55 @@ Widget _buildRememberMeCheckbox() {
   );
 }
 
-//_buildLoginBtn()
-Widget _buildLoginBtn() {
-  return Container(
-    padding: EdgeInsets.symmetric(vertical: 25.0),
-    width: double.infinity,
-    child: ElevatedButton(
-      onPressed: () => print('Login Button Pressed'),
-      style: ElevatedButton.styleFrom(
-        primary: Colors.white,
-        onPrimary: Colors.black,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(30.0),
+// _BuildLoginBtn
+class _BuildRegisterBtn extends StatelessWidget {
+  const _BuildRegisterBtn();
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.symmetric(vertical: 25.0),
+      width: double.infinity,
+      child: ElevatedButton(
+        onPressed: () => print('Register Button Pressed'),
+        style: ElevatedButton.styleFrom(
+          primary: Colors.white,
+          onPrimary: Colors.black,
+          shadowColor: Colors.black,
+          elevation: 5,
+          padding: const EdgeInsets.all(15.0),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(30.0),
+          ),
         ),
-        elevation: 5.0,
-        padding: EdgeInsets.all(15.0),
-      ),
-      child: Text(
-        'LOGIN',
-        style: TextStyle(
-          color: Color(0xFF527DAA),
-          letterSpacing: 1.5,
-          fontSize: 18.0,
-          fontWeight: FontWeight.bold,
-          fontFamily: 'OpenSans',
+        child: const Text(
+          'REGISTRAR',
+          style: TextStyle(
+            color: Color(0xFF527DAA),
+            letterSpacing: 1.5,
+            fontSize: 18.0,
+            fontWeight: FontWeight.bold,
+            fontFamily: 'OpenSans',
+          ),
         ),
       ),
-    ),
-  );
+    );
+  }
 }
 
 //_buildSignInWithText()
 Widget _buildSignInWithText() {
   return Column(
     children: [
-      Text(
+      const Text(
         '- OR -',
         style: TextStyle(
           color: Colors.white,
           fontWeight: FontWeight.w400,
         ),
       ),
-      SizedBox(height: 20.0),
-      Text(
+      const SizedBox(height: 20.0),
+      const Text(
         'Sign in with',
         style: TextStyle(
           color: Colors.white,
@@ -301,53 +307,61 @@ Widget _buildSignInWithText() {
   );
 }
 
-//_buildSocialBtnRow()
-Widget _buildSocialBtnRow() {
-  return Padding(
-    padding: EdgeInsets.symmetric(vertical: 30.0),
-    child: Row(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      children: [
-        _buildSocialBtn(
-          () => print('Login with Facebook'),
-          AssetImage(
-            'assets/logos/facebook.jpg',
-          ),
-        ),
-        _buildSocialBtn(
-          () => print('Login with Google'),
-          AssetImage(
-            'assets/logos/google.jpg',
-          ),
-        ),
-      ],
-    ),
-  );
-}
+// _BuildSocialBtnRow
+class _BuildSocialBtnRow extends StatelessWidget {
+  const _BuildSocialBtnRow({super.key});
 
-//_buildSocialBtn()
-Widget _buildSocialBtn(Function onTap, AssetImage logo) {
-  return GestureDetector(
-    onTap: () => onTap,
-    child: Container(
-      height: 60.0,
-      width: 60.0,
-      decoration: BoxDecoration(
-        shape: BoxShape.circle,
-        color: Colors.white,
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black26,
-            offset: Offset(0, 2),
-            blurRadius: 6.0,
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 8.0),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          _BuildSocialBtn(
+            onTap: () => print('Login with Facebook'),
+            logo: const AssetImage(
+              'assets/logos/facebook.jpg',
+            ),
+          ),
+          _BuildSocialBtn(
+            onTap: () => print('Login with Google'),
+            logo: const AssetImage(
+              'assets/logos/google.jpg',
+            ),
           ),
         ],
-        image: DecorationImage(
-          image: logo,
+      ),
+    );
+  }
+}
+
+// _BuildSocialBtn
+class _BuildSocialBtn extends StatelessWidget {
+  final Function? onTap;
+  final AssetImage logo;
+  const _BuildSocialBtn({
+    super.key,
+    this.onTap,
+    required this.logo,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () => onTap,
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(25.0),
+        child: Container(
+          height: 45.0,
+          width: 45.0,
+          child: CachedNetworkImage(
+            imageUrl: 'https://picsum.photos/250?image=9',
+          ),
         ),
       ),
-    ),
-  );
+    );
+  }
 }
 
 //_buildSignupBtn()
@@ -355,7 +369,7 @@ Widget _buildSignupBtn() {
   return GestureDetector(
     onTap: () => print('Sign Up Button Pressed'),
     child: RichText(
-      text: TextSpan(
+      text: const TextSpan(
         children: [
           TextSpan(
             text: 'Don\'t have an Account? ',

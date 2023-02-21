@@ -4,125 +4,160 @@ import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:motorparts_marketplace/pages/auth_pages/register_page.dart';
 
+//The height of the Login Page is 2/3 of the screen
 class LoginPage extends StatelessWidget {
   const LoginPage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        SizedBox(
-          height: double.infinity,
-          child: SingleChildScrollView(
-            physics: const AlwaysScrollableScrollPhysics(),
-            padding: const EdgeInsets.symmetric(
-              horizontal: 40.0,
-              vertical: 0.0,
+    final Size size = MediaQuery.of(context).size;
+    final double heightOfThisPage = size.height / 3 * 2;
+    final double freeSpaceInsideThisPage = heightOfThisPage -
+            40.0 //_BuildEmailTF
+            -
+            40.0 //_BuildPasswordTF
+            -
+            20.0 //_BuildForgotPasswordBtn
+            -
+            20.0 //_BuildRememberMeCheckbox
+            -
+            heightOfThisPage * 0.05 //Between _BuildEmailTF and _BuildPasswordTF
+            -
+            heightOfThisPage *
+                0.025 //Between _BuildPasswordTF and _BuildForgotPasswordBtn
+            -
+            heightOfThisPage *
+                0.025 //Between _BuildForgotPasswordBtn and _BuildRememberMeCheckbox
+
+        ;
+    print('heightOfThisPage: $heightOfThisPage');
+    print('freeSpaceInsideThisPage: $freeSpaceInsideThisPage');
+    bool pagePerfect = false; // Less than 1% of free space
+    if (freeSpaceInsideThisPage < 0.01) {
+      pagePerfect = true;
+    }
+    return Container(
+      color: pagePerfect ? Colors.green : Colors.red,
+      height: heightOfThisPage,
+      child: SingleChildScrollView(
+        physics: const AlwaysScrollableScrollPhysics(),
+        padding: const EdgeInsets.symmetric(
+          horizontal: 40.0,
+          vertical: 0.0,
+        ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            SizedBox(
+              height: heightOfThisPage * 0.0,
             ),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                _buildEmailTF(),
-                const SizedBox(
-                  height: 8.0,
-                ),
-                _buildPasswordTF(),
-                const _BuildForgotPasswordBtn(),
-                const _BuildRememberMeCheckbox(),
-                const _BuildLoginBtn(),
-                const _BuildSignInWithText(),
-                const _BuildSocialBtnRow(),
-                const _BuildSignupBtn(),
-              ],
+            _BuildEmailTF(),
+            SizedBox(
+              height: heightOfThisPage * 0.05,
             ),
-          ),
-        )
-      ],
+            _BuildPasswordTF(),
+            SizedBox(
+              height: heightOfThisPage * 0.025,
+            ),
+            const _BuildForgotPasswordBtn(),
+            SizedBox(
+              height: heightOfThisPage * 0.025,
+            ),
+            const _BuildRememberMeCheckbox(),
+            const _BuildLoginBtn(),
+            const _BuildSignInWithText(),
+            const _BuildSocialBtnRow(),
+            const _BuildSignupBtn(),
+            SizedBox(
+              height: heightOfThisPage * 0.1,
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
 
-//_buildEmailTF
-Widget _buildEmailTF() {
-  return Column(
-    crossAxisAlignment: CrossAxisAlignment.start,
-    children: [
-      Container(
-        alignment: Alignment.centerLeft,
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(10.0),
-          boxShadow: [
-            const BoxShadow(
-              color: Colors.black12,
-              blurRadius: 6.0,
-              offset: Offset(0, 2),
-            ),
-          ],
-        ),
-        height: 40.0,
-        child: const TextField(
-          keyboardType: TextInputType.emailAddress,
-          style: TextStyle(
-            color: Colors.black87,
+//_BuildEmailTF
+class _BuildEmailTF extends StatelessWidget {
+  const _BuildEmailTF({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      alignment: Alignment.centerLeft,
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(10.0),
+        boxShadow: const [
+          BoxShadow(
+            color: Colors.black12,
+            blurRadius: 6.0,
+            offset: Offset(0, 2),
           ),
-          decoration: InputDecoration(
-            border: InputBorder.none,
-            // contentPadding: EdgeInsets.all(0.0),
-            prefixIcon: Icon(
-              Icons.email,
-              color: Colors.black,
-            ),
-            hintText: 'Ingrese su correo electrónico',
-            hintStyle: TextStyle(
-              color: Colors.black38,
-            ),
+        ],
+      ),
+      height: 40.0,
+      child: const TextField(
+        keyboardType: TextInputType.emailAddress,
+        style: TextStyle(
+          color: Colors.black87,
+        ),
+        decoration: InputDecoration(
+          border: InputBorder.none,
+          prefixIcon: Icon(
+            Icons.email,
+            color: Colors.black,
+          ),
+          hintText: 'Ingrese su correo electrónico',
+          hintStyle: TextStyle(
+            color: Colors.black38,
           ),
         ),
       ),
-    ],
-  );
+    );
+  }
 }
 
-//_buildPasswordTF
-Widget _buildPasswordTF() {
-  return Column(
-    crossAxisAlignment: CrossAxisAlignment.start,
-    children: [
-      Container(
-        alignment: Alignment.centerLeft,
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(10.0),
-          boxShadow: const [
-            BoxShadow(
-              color: Colors.black12,
-              blurRadius: 6.0,
-              offset: Offset(0, 2),
-            ),
-          ],
-        ),
-        height: 40.0,
-        child: const TextField(
-          obscureText: true,
-          style: TextStyle(
-            color: Colors.black87,
+//_BuildPasswordTF
+class _BuildPasswordTF extends StatelessWidget {
+  const _BuildPasswordTF({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      alignment: Alignment.centerLeft,
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(10.0),
+        boxShadow: const [
+          BoxShadow(
+            color: Colors.black12,
+            blurRadius: 6.0,
+            offset: Offset(0, 2),
           ),
-          decoration: InputDecoration(
-            border: InputBorder.none,
-            prefixIcon: Icon(
-              Icons.lock,
-              color: Colors.black,
-            ),
-            hintText: 'Ingrese su contraseña',
-            hintStyle: TextStyle(
-              color: Colors.black38,
-            ),
+        ],
+      ),
+      height: 40.0,
+      child: const TextField(
+        obscureText: true,
+        style: TextStyle(
+          color: Colors.black87,
+        ),
+        decoration: InputDecoration(
+          border: InputBorder.none,
+          prefixIcon: Icon(
+            Icons.lock,
+            color: Colors.black,
+          ),
+          hintText: 'Ingrese su contraseña',
+          hintStyle: TextStyle(
+            color: Colors.black38,
           ),
         ),
       ),
-    ],
-  );
+    );
+  }
 }
 
 // _BuildForgotPasswordBtn
@@ -133,6 +168,7 @@ class _BuildForgotPasswordBtn extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       alignment: Alignment.centerRight,
+      height: 20.0,
       child: TextButton(
         onPressed: () => print('Forgot Password Button Pressed'),
         style: ButtonStyle(
@@ -298,18 +334,6 @@ class _BuildSocialBtn extends StatelessWidget {
         child: Container(
           height: 45.0,
           width: 45.0,
-          // decoration: BoxDecoration(
-          //   // shape: BoxShape.circle,
-          //   color: Colors.white,
-          //   borderRadius: BorderRadius.circular(10.0),
-          //   boxShadow: [
-          //     const BoxShadow(
-          //       color: Colors.black26,
-          //       offset: Offset(0, 2),
-          //       blurRadius: 6.0,
-          //     ),
-          //   ],
-          // ),
           child: CachedNetworkImage(
             imageUrl: 'https://picsum.photos/250?image=9',
           ),
