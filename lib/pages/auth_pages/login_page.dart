@@ -61,7 +61,7 @@ class LoginPage extends StatelessWidget {
       // color: pagePerfect ? Colors.green : Colors.red,
       height: heightOfThisPage,
       child: SingleChildScrollView(
-        physics: const NeverScrollableScrollPhysics(),
+        physics: const FixedExtentScrollPhysics(),
         padding: const EdgeInsets.symmetric(
           horizontal: 40.0,
           vertical: 0.0,

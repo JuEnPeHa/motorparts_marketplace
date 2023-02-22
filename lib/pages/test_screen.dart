@@ -57,7 +57,7 @@ class TestScreen extends StatelessWidget {
                 crossAxisSpacing: 10,
                 mainAxisSpacing: 10,
                 padding: EdgeInsets.all(10),
-                physics: NeverScrollableScrollPhysics(),
+                physics: FixedExtentScrollPhysics(),
                 shrinkWrap: true,
                 crossAxisCount: 2,
                 children: [
