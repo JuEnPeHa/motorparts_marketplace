@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:motorparts_marketplace/pages/auth_pages/bloc/user_auth_bloc.dart';
 import 'package:motorparts_marketplace/pages/auth_pages/register_page.dart';
 
 //The height of the Login Page is 2/3 of the screen
@@ -21,6 +22,14 @@ class LoginPage extends StatelessWidget {
             -
             20.0 //_BuildRememberMeCheckbox
             -
+            100.0 //_BuildLoginBtn
+            -
+            56.0 //_BuildSignInWithText
+            -
+            45.0 //_BuildSocialBtnRow
+            -
+            21.0 //_BuildSignupBtn
+            -
             heightOfThisPage * 0.05 //Between _BuildEmailTF and _BuildPasswordTF
             -
             heightOfThisPage *
@@ -28,19 +37,31 @@ class LoginPage extends StatelessWidget {
             -
             heightOfThisPage *
                 0.025 //Between _BuildForgotPasswordBtn and _BuildRememberMeCheckbox
+            -
+            heightOfThisPage *
+                0.05 //Between _BuildRememberMeCheckbox and _BuildLoginBtn
+            -
+            heightOfThisPage *
+                0.05 //Between _BuildSignInWithText and _BuildSocialBtnRow
+            -
+            heightOfThisPage *
+                0.05 //Between _BuildSocialBtnRow and _BuildSignupBtn
+            -
+            heightOfThisPage *
+                0.1 //Between _BuildSignupBtn and bottom of the screen
 
         ;
     print('heightOfThisPage: $heightOfThisPage');
     print('freeSpaceInsideThisPage: $freeSpaceInsideThisPage');
-    bool pagePerfect = false; // Less than 1% of free space
-    if (freeSpaceInsideThisPage < 0.01) {
+    bool pagePerfect = false; // Less than 5% of free space
+    if (freeSpaceInsideThisPage < (heightOfThisPage * 0.10)) {
       pagePerfect = true;
     }
     return Container(
-      color: pagePerfect ? Colors.green : Colors.red,
+      // color: pagePerfect ? Colors.green : Colors.red,
       height: heightOfThisPage,
       child: SingleChildScrollView(
-        physics: const AlwaysScrollableScrollPhysics(),
+        physics: const NeverScrollableScrollPhysics(),
         padding: const EdgeInsets.symmetric(
           horizontal: 40.0,
           vertical: 0.0,
@@ -48,9 +69,6 @@ class LoginPage extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            SizedBox(
-              height: heightOfThisPage * 0.0,
-            ),
             _BuildEmailTF(),
             SizedBox(
               height: heightOfThisPage * 0.05,
@@ -64,9 +82,18 @@ class LoginPage extends StatelessWidget {
               height: heightOfThisPage * 0.025,
             ),
             const _BuildRememberMeCheckbox(),
+            SizedBox(
+              height: heightOfThisPage * 0.05,
+            ),
             const _BuildLoginBtn(),
             const _BuildSignInWithText(),
+            SizedBox(
+              height: heightOfThisPage * 0.05,
+            ),
             const _BuildSocialBtnRow(),
+            SizedBox(
+              height: heightOfThisPage * 0.05,
+            ),
             const _BuildSignupBtn(),
             SizedBox(
               height: heightOfThisPage * 0.1,
@@ -229,8 +256,12 @@ class _BuildLoginBtn extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 25.0),
       width: double.infinity,
+      height: 100,
       child: ElevatedButton(
-        onPressed: () => print('Login Button Pressed'),
+        onPressed: () {
+          print('Login Button Pressed');
+          UserAuthFun.changeIndex(1, context);
+        },
         style: ElevatedButton.styleFrom(
           primary: Colors.white,
           onPrimary: Colors.black,
@@ -258,59 +289,58 @@ class _BuildLoginBtn extends StatelessWidget {
 
 // _BuildSignInWithText
 class _BuildSignInWithText extends StatelessWidget {
-  const _BuildSignInWithText({
-    super.key,
-  });
+  const _BuildSignInWithText();
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        const Text(
-          '- O -',
-          style: TextStyle(
-            color: Colors.black,
-            fontWeight: FontWeight.w400,
+    return SizedBox(
+      height: 56.0,
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: const [
+          Text(
+            '- O -',
+            style: TextStyle(
+              color: Colors.black,
+              fontWeight: FontWeight.w400,
+            ),
           ),
-        ),
-        const SizedBox(height: 20.0),
-        const Text(
-          'Ingresar con',
-          style: TextStyle(
-            color: Colors.black,
-            fontFamily: 'OpenSans',
+          SizedBox(height: 20.0),
+          Text(
+            'Ingresar con',
+            style: TextStyle(
+              color: Colors.black,
+              fontFamily: 'OpenSans',
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }
 
 // _BuildSocialBtnRow
 class _BuildSocialBtnRow extends StatelessWidget {
-  const _BuildSocialBtnRow({super.key});
+  const _BuildSocialBtnRow();
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 8.0),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: [
-          _BuildSocialBtn(
-            onTap: () => print('Login with Facebook'),
-            logo: const AssetImage(
-              'assets/logos/facebook.jpg',
-            ),
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      children: [
+        _BuildSocialBtn(
+          onTap: () => print('Login with Facebook'),
+          logo: const AssetImage(
+            'assets/logos/facebook.jpg',
           ),
-          _BuildSocialBtn(
-            onTap: () => print('Login with Google'),
-            logo: const AssetImage(
-              'assets/logos/google.jpg',
-            ),
+        ),
+        _BuildSocialBtn(
+          onTap: () => print('Login with Google'),
+          logo: const AssetImage(
+            'assets/logos/google.jpg',
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }
@@ -320,7 +350,6 @@ class _BuildSocialBtn extends StatelessWidget {
   final Function? onTap;
   final AssetImage logo;
   const _BuildSocialBtn({
-    super.key,
     this.onTap,
     required this.logo,
   });
@@ -331,7 +360,7 @@ class _BuildSocialBtn extends StatelessWidget {
       onTap: () => onTap,
       child: ClipRRect(
         borderRadius: BorderRadius.circular(25.0),
-        child: Container(
+        child: SizedBox(
           height: 45.0,
           width: 45.0,
           child: CachedNetworkImage(

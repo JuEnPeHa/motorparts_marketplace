@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:motorparts_marketplace/pages/auth_pages/bloc/user_auth_bloc.dart';
 import 'package:motorparts_marketplace/pages/auth_pages/login_page.dart';
+import 'package:motorparts_marketplace/pages/auth_pages/onboarding_screen.dart';
 import 'package:motorparts_marketplace/pages/home_page.dart';
-import 'package:motorparts_marketplace/pages/onboarding_screen.dart';
 import 'package:motorparts_marketplace/providers/cart_provider.dart';
 import 'package:motorparts_marketplace/providers/navigation_provider.dart';
 import 'package:motorparts_marketplace/theme/app_theme.dart';
@@ -27,7 +29,14 @@ class AppState extends StatelessWidget {
           create: (_) => CartProvider(),
         ),
       ],
-      child: const MyApp(),
+      child: MultiBlocProvider(
+        providers: [
+          BlocProvider<UserAuthBloc>(
+            create: (context) => UserAuthBloc(),
+          ),
+        ],
+        child: const MyApp(),
+      ),
     );
   }
 }

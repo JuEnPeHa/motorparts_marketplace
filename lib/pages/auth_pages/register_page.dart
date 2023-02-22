@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:motorparts_marketplace/pages/auth_pages/bloc/user_auth_bloc.dart';
 
 //The height of the Register Page is 2/3 of the screen
 class RegisterPage extends StatelessWidget {
@@ -10,9 +11,16 @@ class RegisterPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
+    final double heightOfThisPage = size.height / 3 * 2;
+    // final double freeSpaceInsideThisPage = heightOfThisPage;
+    print('heightOfThisPage: $heightOfThisPage');
+    // print('freeSpaceInsideThisPage: $freeSpaceInsideThisPage');
+    // bool pagePerfect = false; // Less than 5% of free space
+    // if (freeSpaceInsideThisPage < (heightOfThisPage * 0.10)) {
+    //   pagePerfect = true;
+    // }
     return Container(
-      color: Colors.blue,
-      height: size.height / 3 * 2,
+      height: heightOfThisPage,
       child: SingleChildScrollView(
         physics: const AlwaysScrollableScrollPhysics(),
         padding: const EdgeInsets.symmetric(
@@ -22,18 +30,38 @@ class RegisterPage extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            _buildNameTF(),
-            const SizedBox(
-              height: 8.0,
+            const _BuildEmailTF(),
+            SizedBox(
+              height: heightOfThisPage * 0.05,
             ),
-            _buildEmailTF(),
-            const SizedBox(
-              height: 8.0,
+            const _BuildPasswordTF(),
+            SizedBox(
+              height: heightOfThisPage * 0.05,
             ),
-            _buildPasswordTF(),
-            _buildForgotPasswordBtn(),
-            _buildRememberMeCheckbox(),
-            _BuildRegisterBtn(),
+            //Repetir contraseña
+            const _BuildPasswordTF(
+              isRepeatPassword: true,
+            ),
+            SizedBox(
+              height: heightOfThisPage * 0.025,
+            ),
+            const _BuildRememberMeCheckbox(),
+            SizedBox(
+              height: heightOfThisPage * 0.025,
+            ),
+            const _BuildRegisterBtn(),
+            const _BuildSignInWithText(),
+            SizedBox(
+              height: heightOfThisPage * 0.025,
+            ),
+            const _BuildSocialBtnRow(),
+            SizedBox(
+              height: heightOfThisPage * 0.025,
+            ),
+            const _BuildSignupBtn(),
+            SizedBox(
+              height: heightOfThisPage * 0.05,
+            ),
           ],
         ),
       ),
@@ -41,210 +69,125 @@ class RegisterPage extends StatelessWidget {
   }
 }
 
-//_buildNameTF()
-Widget _buildNameTF() {
-  return Column(
-    crossAxisAlignment: CrossAxisAlignment.start,
-    children: [
-      const Text(
-        'Name',
+//_BuildEmailTF
+class _BuildEmailTF extends StatelessWidget {
+  const _BuildEmailTF({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      alignment: Alignment.centerLeft,
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(10.0),
+        boxShadow: const [
+          BoxShadow(
+            color: Colors.black12,
+            blurRadius: 6.0,
+            offset: Offset(0, 2),
+          ),
+        ],
+      ),
+      height: 40.0,
+      child: const TextField(
+        keyboardType: TextInputType.emailAddress,
         style: TextStyle(
-          color: Colors.white,
-          fontWeight: FontWeight.bold,
-          fontFamily: 'OpenSans',
+          color: Colors.black87,
+        ),
+        decoration: InputDecoration(
+          border: InputBorder.none,
+          prefixIcon: Icon(
+            Icons.email,
+            color: Colors.black,
+          ),
+          hintText: 'Ingrese su correo electrónico',
+          hintStyle: TextStyle(
+            color: Colors.black38,
+          ),
         ),
       ),
-      const SizedBox(height: 10.0),
-      Container(
-        alignment: Alignment.centerLeft,
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(10.0),
-          boxShadow: [
-            const BoxShadow(
-              color: Colors.black26,
-              blurRadius: 6.0,
-              offset: Offset(0, 2),
-            ),
-          ],
-        ),
-        height: 60.0,
-        child: const TextField(
-          keyboardType: TextInputType.emailAddress,
-          style: TextStyle(
-            color: Colors.black87,
+    );
+  }
+}
+
+//_BuildPasswordTF()
+class _BuildPasswordTF extends StatelessWidget {
+  final bool isRepeatPassword;
+  const _BuildPasswordTF({
+    super.key,
+    this.isRepeatPassword = false,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      alignment: Alignment.centerLeft,
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(10.0),
+        boxShadow: const [
+          BoxShadow(
+            color: Colors.black12,
+            blurRadius: 6.0,
+            offset: Offset(0, 2),
           ),
-          decoration: InputDecoration(
-            border: InputBorder.none,
-            contentPadding: EdgeInsets.only(top: 14.0),
-            prefixIcon: Icon(
-              Icons.person,
+        ],
+      ),
+      height: 40.0,
+      child: TextField(
+        obscureText: true,
+        style: const TextStyle(
+          color: Colors.black87,
+        ),
+        decoration: InputDecoration(
+          border: InputBorder.none,
+          prefixIcon: const Icon(
+            Icons.lock,
+            color: Colors.black,
+          ),
+          hintText: isRepeatPassword
+              ? 'Repita su contraseña'
+              : 'Ingrese su contraseña',
+          hintStyle: const TextStyle(
+            color: Colors.black38,
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+// _BuildRememberMeCheckbox
+class _BuildRememberMeCheckbox extends StatelessWidget {
+  const _BuildRememberMeCheckbox();
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: 20.0,
+      child: Row(
+        children: [
+          Theme(
+            data: ThemeData(unselectedWidgetColor: Colors.white),
+            child: Checkbox(
+              value: true,
+              checkColor: Colors.green,
+              activeColor: Colors.white,
+              onChanged: (value) {},
+            ),
+          ),
+          const Text(
+            'Recuérdame',
+            style: TextStyle(
               color: Colors.black,
-            ),
-            hintText: 'Enter your Name',
-            hintStyle: TextStyle(
-              color: Colors.black38,
+              fontWeight: FontWeight.bold,
+              fontFamily: 'OpenSans',
             ),
           ),
-        ),
+        ],
       ),
-    ],
-  );
-}
-
-//_buildEmailTF()
-Widget _buildEmailTF() {
-  return Column(
-    crossAxisAlignment: CrossAxisAlignment.start,
-    children: [
-      const Text(
-        'Email',
-        style: TextStyle(
-          color: Colors.white,
-          fontWeight: FontWeight.bold,
-          fontFamily: 'OpenSans',
-        ),
-      ),
-      const SizedBox(height: 10.0),
-      Container(
-        alignment: Alignment.centerLeft,
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(10.0),
-          boxShadow: [
-            const BoxShadow(
-              color: Colors.black26,
-              blurRadius: 6.0,
-              offset: Offset(0, 2),
-            ),
-          ],
-        ),
-        height: 60.0,
-        child: const TextField(
-          keyboardType: TextInputType.emailAddress,
-          style: TextStyle(
-            color: Colors.black87,
-          ),
-          decoration: InputDecoration(
-            border: InputBorder.none,
-            contentPadding: EdgeInsets.only(top: 14.0),
-            prefixIcon: Icon(
-              Icons.email,
-              color: Colors.black,
-            ),
-            hintText: 'Enter your Email',
-            hintStyle: TextStyle(
-              color: Colors.black38,
-            ),
-          ),
-        ),
-      ),
-    ],
-  );
-}
-
-//_buildPasswordTF()
-Widget _buildPasswordTF() {
-  return Column(
-    crossAxisAlignment: CrossAxisAlignment.start,
-    children: [
-      const Text(
-        'Password',
-        style: TextStyle(
-          color: Colors.white,
-          fontWeight: FontWeight.bold,
-          fontFamily: 'OpenSans',
-        ),
-      ),
-      const SizedBox(height: 10.0),
-      Container(
-        alignment: Alignment.centerLeft,
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(10.0),
-          boxShadow: [
-            const BoxShadow(
-              color: Colors.black26,
-              blurRadius: 6.0,
-              offset: Offset(0, 2),
-            ),
-          ],
-        ),
-        height: 60.0,
-        child: const TextField(
-          obscureText: true,
-          style: TextStyle(
-            color: Colors.black87,
-          ),
-          decoration: InputDecoration(
-            border: InputBorder.none,
-            contentPadding: EdgeInsets.only(top: 14.0),
-            prefixIcon: Icon(
-              Icons.lock,
-              color: Colors.black,
-            ),
-            hintText: 'Enter your Password',
-            hintStyle: TextStyle(
-              color: Colors.black38,
-            ),
-          ),
-        ),
-      ),
-    ],
-  );
-}
-
-//_buildForgotPasswordBtn()
-Widget _buildForgotPasswordBtn() {
-  return Container(
-    alignment: Alignment.centerRight,
-    child: TextButton(
-      onPressed: () => print('Forgot Password Button Pressed'),
-      style: ButtonStyle(
-        backgroundColor: MaterialStateProperty.all(Colors.transparent),
-        shape: MaterialStateProperty.all(RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(30.0),
-        )),
-        padding: MaterialStateProperty.all(const EdgeInsets.only(right: 0.0)),
-      ),
-      child: const Text(
-        'Forgot Password?',
-        style: TextStyle(
-          color: Colors.white,
-          fontWeight: FontWeight.bold,
-          fontFamily: 'OpenSans',
-        ),
-      ),
-    ),
-  );
-}
-
-//_buildRememberMeCheckbox()
-Widget _buildRememberMeCheckbox() {
-  return Container(
-    height: 20.0,
-    child: Row(
-      children: [
-        Theme(
-          data: ThemeData(unselectedWidgetColor: Colors.white),
-          child: Checkbox(
-            value: true,
-            checkColor: Colors.green,
-            activeColor: Colors.white,
-            onChanged: (value) {},
-          ),
-        ),
-        const Text(
-          'Remember me',
-          style: TextStyle(
-            color: Colors.white,
-            fontWeight: FontWeight.bold,
-            fontFamily: 'OpenSans',
-          ),
-        ),
-      ],
-    ),
-  );
+    );
+  }
 }
 
 // _BuildLoginBtn
@@ -257,7 +200,10 @@ class _BuildRegisterBtn extends StatelessWidget {
       padding: const EdgeInsets.symmetric(vertical: 25.0),
       width: double.infinity,
       child: ElevatedButton(
-        onPressed: () => print('Register Button Pressed'),
+        onPressed: () {
+          print('Register Button Pressed');
+          UserAuthFun.changeIndex(0, context);
+        },
         style: ElevatedButton.styleFrom(
           primary: Colors.white,
           onPrimary: Colors.black,
@@ -283,28 +229,36 @@ class _BuildRegisterBtn extends StatelessWidget {
   }
 }
 
-//_buildSignInWithText()
-Widget _buildSignInWithText() {
-  return Column(
-    children: [
-      const Text(
-        '- OR -',
-        style: TextStyle(
-          color: Colors.white,
-          fontWeight: FontWeight.w400,
-        ),
+// _BuildSignInWithText
+class _BuildSignInWithText extends StatelessWidget {
+  const _BuildSignInWithText();
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      height: 56.0,
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: const [
+          Text(
+            '- O -',
+            style: TextStyle(
+              color: Colors.black,
+              fontWeight: FontWeight.w400,
+            ),
+          ),
+          SizedBox(height: 20.0),
+          Text(
+            'Registrate con',
+            style: TextStyle(
+              color: Colors.black,
+              fontFamily: 'OpenSans',
+            ),
+          ),
+        ],
       ),
-      const SizedBox(height: 20.0),
-      const Text(
-        'Sign in with',
-        style: TextStyle(
-          color: Colors.white,
-          fontWeight: FontWeight.bold,
-          fontFamily: 'OpenSans',
-        ),
-      ),
-    ],
-  );
+    );
+  }
 }
 
 // _BuildSocialBtnRow
@@ -364,31 +318,43 @@ class _BuildSocialBtn extends StatelessWidget {
   }
 }
 
-//_buildSignupBtn()
-Widget _buildSignupBtn() {
-  return GestureDetector(
-    onTap: () => print('Sign Up Button Pressed'),
-    child: RichText(
-      text: const TextSpan(
-        children: [
-          TextSpan(
-            text: 'Don\'t have an Account? ',
-            style: TextStyle(
-              color: Colors.white,
-              fontSize: 18.0,
-              fontWeight: FontWeight.w400,
-            ),
+//_BuildSignupBtn
+class _BuildSignupBtn extends StatelessWidget {
+  const _BuildSignupBtn({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () {
+        print('Sign Up Button Pressed');
+        Navigator.of(context).push(
+          MaterialPageRoute(
+            builder: (context) => const RegisterPage(),
           ),
-          TextSpan(
-            text: 'Sign Up',
-            style: TextStyle(
-              color: Colors.white,
-              fontSize: 18.0,
-              fontWeight: FontWeight.bold,
+        );
+      },
+      child: RichText(
+        text: const TextSpan(
+          children: [
+            TextSpan(
+              text: 'Ya tienes una cuenta? ',
+              style: TextStyle(
+                color: Colors.black,
+                fontSize: 18.0,
+                fontWeight: FontWeight.w400,
+              ),
             ),
-          ),
-        ],
+            TextSpan(
+              text: 'Inicia sesión',
+              style: TextStyle(
+                color: Colors.black,
+                fontSize: 18.0,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ],
+        ),
       ),
-    ),
-  );
+    );
+  }
 }
