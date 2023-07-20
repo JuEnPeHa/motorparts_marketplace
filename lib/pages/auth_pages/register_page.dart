@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:motorparts_marketplace/pages/auth_pages/bloc/user_auth_bloc.dart';
+import 'package:motorparts_marketplace/pages/home_page.dart';
 
 //The height of the Register Page is 2/3 of the screen
 class RegisterPage extends StatelessWidget {
@@ -273,7 +274,12 @@ class _BuildSocialBtnRow extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           _BuildSocialBtn(
-            onTap: () => print('Login with Facebook'),
+            onTap: () => Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => MyHomePage(
+                          title: 'Motorparts Marketplace',
+                        ))),
             logo: const AssetImage(
               'assets/logos/facebook.jpg',
             ),
@@ -292,7 +298,7 @@ class _BuildSocialBtnRow extends StatelessWidget {
 
 // _BuildSocialBtn
 class _BuildSocialBtn extends StatelessWidget {
-  final Function? onTap;
+  final Function()? onTap;
   final AssetImage logo;
   const _BuildSocialBtn({
     super.key,
@@ -303,7 +309,7 @@ class _BuildSocialBtn extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => onTap,
+      onTap: onTap,
       child: ClipRRect(
         borderRadius: BorderRadius.circular(25.0),
         child: Container(
