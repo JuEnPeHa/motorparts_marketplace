@@ -3,14 +3,13 @@ import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:motorparts_marketplace/pages/busqueda_screen.dart';
-import 'package:motorparts_marketplace/pages/cart_screen.dart';
 import 'package:motorparts_marketplace/minor_important_pages/contact.dart';
 import 'package:motorparts_marketplace/models/navigation_item.dart';
-import 'package:motorparts_marketplace/pages/profile_screen.dart';
-import 'package:motorparts_marketplace/pages/test_screen.dart';
-import 'package:motorparts_marketplace/providers/navigation_provider.dart';
+import 'package:motorparts_marketplace/pages/busqueda_screen.dart';
+import 'package:motorparts_marketplace/pages/cart_screen.dart';
 import 'package:motorparts_marketplace/pages/principal_screen.dart';
+import 'package:motorparts_marketplace/pages/profile_screen.dart';
+import 'package:motorparts_marketplace/providers/navigation_provider.dart';
 import 'package:motorparts_marketplace/widgets/build_item_bottom_nav_bar.dart';
 import 'package:motorparts_marketplace/widgets/navigation_drawer_widget.dart';
 import 'package:provider/provider.dart';
@@ -48,6 +47,7 @@ class _MyHomePageState extends State<MyHomePage> {
         CartScreen(),
         ProfileScreen(),
       ];
+
   static final List<Widget> screens = _screens();
   static List<NavigationItem> navigationItems = [
     for (var i = 0; i < screens.length; i++)

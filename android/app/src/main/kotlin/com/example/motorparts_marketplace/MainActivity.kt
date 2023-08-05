@@ -1,4 +1,4 @@
-package com.example.motorparts_marketplace
+package technology.jeph.motorparts_marketplace
 
 import io.flutter.embedding.android.FlutterActivity
 
