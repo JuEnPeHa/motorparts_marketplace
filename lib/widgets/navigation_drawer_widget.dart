@@ -30,6 +30,15 @@ class NavigationDrawerWidget extends StatelessWidget {
                   isCollapsed: isCollapsed,
                 )),
             const SizedBox(height: 20),
+            BuildMenuItem(
+              isCollapsed: isCollapsed,
+              text: 'Home',
+              icon: Icons.home,
+              onTap: () {
+                // navigationProvider.setNavigationIndex(0);
+                Navigator.of(context).pop();
+              },
+            ),
             const Spacer(),
             BuildCollapseIcon(
               buildContext: context,
