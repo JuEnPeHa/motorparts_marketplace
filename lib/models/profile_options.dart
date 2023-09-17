@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:motorparts_marketplace/minor_important_pages/contact.dart';
 import 'package:motorparts_marketplace/pages/profile/direcciones.dart';
 import 'package:motorparts_marketplace/pages/profile/formas_de_pago.dart';
 
@@ -99,7 +100,7 @@ final List<ProfileOption> profileOptions = [
     title: 'Ayuda',
     subtitle: 'Administra tus ayudas',
     icon: Icons.help,
-    route: Container(),
+    route: Contact(),
   ),
   ProfileOption(
     title: 'Cerrar sesión',

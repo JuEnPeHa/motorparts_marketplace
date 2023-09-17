@@ -6,6 +6,16 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:motorparts_marketplace/minor_important_pages/article.dart';
 
+const String loremIpsum = 'Lorem Ipsum is simply dummy text of the printing '
+    'and typesetting industry. Lorem Ipsum has been the industry\'s standard '
+    'dummy text ever since the 1500s, when an unknown printer took a galley '
+    'of type and scrambled it to make a type specimen book. It has survived '
+    'not only five centuries, but also the leap into electronic typesetting, '
+    'remaining essentially unchanged. It was popularised in the 1960s with '
+    'the release of Letraset sheets containing Lorem Ipsum passages, and more '
+    'recently with desktop publishing software like Aldus PageMaker including '
+    'versions of Lorem Ipsum.';
+
 class PrincipalScreen extends StatelessWidget {
   const PrincipalScreen({Key? key}) : super(key: key);
 
@@ -33,7 +43,7 @@ class PrincipalScreen extends StatelessWidget {
     return CustomScrollView(
       slivers: [
         SliverAppBar(
-          title: const Text('Página Principal'),
+          title: Text('Motorparts Marketplace'),
           floating: true,
           snap: true,
           scrolledUnderElevation: 0,
@@ -94,10 +104,15 @@ class PrincipalScreen extends StatelessWidget {
           ),
           delegate: SliverChildBuilderDelegate(
             (BuildContext context, int index) {
+              final String title = 'Articulo $index';
               return Padding(
                 padding: const EdgeInsets.all(10.0),
                 child: ClipRRect(
-                  borderRadius: BorderRadius.circular(15),
+                  borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(15),
+                      topRight: Radius.circular(15),
+                      bottomLeft: Radius.circular(0),
+                      bottomRight: Radius.circular(0)),
                   child: InkWell(
                     onTap: () {
                       print('Tocaste la foto $index');
@@ -107,26 +122,32 @@ class PrincipalScreen extends StatelessWidget {
                             ? CupertinoPageRoute(
                                 builder: (context) => ArticleDetails(
                                   isIOS: _isIOs(),
-                                  title: '',
+                                  title: title,
                                   api: '',
                                   image: _buildImage(index),
-                                  price: 0,
+                                  price: index.toDouble(),
+                                  description: loremIpsum,
                                 ),
                               )
                             : MaterialPageRoute(
                                 builder: (context) => ArticleDetails(
                                   isIOS: _isIOs(),
-                                  title: '',
+                                  title: title,
                                   api: '',
                                   image: _buildImage(index),
-                                  price: 0,
+                                  price: index.toDouble(),
+                                  description: loremIpsum,
                                 ),
                               ),
                       );
                     },
                     child: Container(
                       alignment: Alignment.center,
-                      color: Theme.of(context).cardColor.withOpacity(0.25),
+                      color: Colors.white70,
+                      // Theme.of(context)
+                      //     .cardColor
+                      //     .withOpacity(0.125)
+                      //     .withGreen(0),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
@@ -137,7 +158,7 @@ class PrincipalScreen extends StatelessWidget {
                             child: _buildImage(index),
                           ),
                           Text(
-                            'Item $index',
+                            title,
                             maxLines: 2,
                             softWrap: true,
                             overflow: TextOverflow.ellipsis,

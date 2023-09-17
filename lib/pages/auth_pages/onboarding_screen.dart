@@ -35,7 +35,7 @@ class OnboardingPage extends StatelessWidget {
                   clipper: WaveClipper2(),
                   child: Container(
                     width: MediaQuery.of(context).size.width,
-                    height: MediaQuery.of(context).size.height / 3,
+                    height: MediaQuery.of(context).size.height / 3.5,
                     decoration: BoxDecoration(
                       color: Theme.of(context).primaryColor.withOpacity(0.50),
                     ),
@@ -52,7 +52,7 @@ class OnboardingPage extends StatelessWidget {
                 clipper: WaveClipper3(),
                 child: Container(
                   width: MediaQuery.of(context).size.width,
-                  height: MediaQuery.of(context).size.height / 3,
+                  height: MediaQuery.of(context).size.height / 3.5,
                   decoration: BoxDecoration(
                     color: Theme.of(context)
                         .colorScheme
@@ -64,9 +64,10 @@ class OnboardingPage extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: <Widget>[
-                      Expanded(
-                        child: SizedBox.shrink(),
-                      ),
+                      Padding(
+                          padding: EdgeInsets.only(
+                        top: MediaQuery.of(context).viewPadding.top,
+                      )),
                       Icon(
                         Icons.car_repair,
                         color: Colors.white,

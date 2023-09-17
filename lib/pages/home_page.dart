@@ -3,10 +3,10 @@ import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:motorparts_marketplace/minor_important_pages/contact.dart';
 import 'package:motorparts_marketplace/models/navigation_item.dart';
 import 'package:motorparts_marketplace/pages/busqueda_screen.dart';
 import 'package:motorparts_marketplace/pages/cart_screen.dart';
+import 'package:motorparts_marketplace/pages/categories_page.dart';
 import 'package:motorparts_marketplace/pages/principal_screen.dart';
 import 'package:motorparts_marketplace/pages/profile_screen.dart';
 import 'package:motorparts_marketplace/providers/navigation_provider.dart';
@@ -36,14 +36,14 @@ class _MyHomePageState extends State<MyHomePage> {
   static const List<Icon> _icons = [
     Icon(Icons.home),
     Icon(Icons.search),
-    Icon(Icons.settings_backup_restore),
+    Icon(Icons.category_outlined),
     Icon(CupertinoIcons.shopping_cart),
     Icon(CupertinoIcons.profile_circled),
   ];
   static List<Widget> _screens() => [
         PrincipalScreen(),
         BusquedaScreen(),
-        Contact(),
+        CategoriesPage(),
         CartScreen(),
         ProfileScreen(),
       ];
