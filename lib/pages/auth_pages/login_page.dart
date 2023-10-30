@@ -1,9 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:motorparts_marketplace/pages/auth_pages/bloc/user_auth_bloc.dart';
 import 'package:motorparts_marketplace/pages/auth_pages/register_page.dart';
+import 'package:motorparts_marketplace/widgets/text_input_widget.dart';
 
 //The height of the Login Page is 2/3 of the screen
 class LoginPage extends StatelessWidget {
@@ -70,6 +69,9 @@ class LoginPage extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             _BuildEmailTF(),
+            TextInputMotorplaceWidget(
+              heightOfThisWidget: 40,
+            ),
             SizedBox(
               height: heightOfThisPage * 0.05,
             ),
