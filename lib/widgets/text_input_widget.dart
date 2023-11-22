@@ -37,7 +37,7 @@ class TextInputMotorplaceWidget extends StatelessWidget {
         ),
         labelStyle: Theme.of(context).textTheme.bodyLarge,
         floatingLabelStyle: Theme.of(context).textTheme.bodyLarge,
-        floatingLabelAlignment: FloatingLabelAlignment.start,
+        floatingLabelAlignment: FloatingLabelAlignment.center,
         floatingLabelBehavior: FloatingLabelBehavior.never,
         label: const Text(
           'Motorplace',
