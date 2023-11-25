@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:motorparts_marketplace/pages/auth_pages/bloc/user_auth_bloc.dart';
-import 'package:motorparts_marketplace/pages/auth_pages/login_register_page.dart';
+import 'package:motorparts_marketplace/pages/home_page.dart';
 import 'package:motorparts_marketplace/providers/cart_provider.dart';
 import 'package:motorparts_marketplace/providers/navigation_provider.dart';
 import 'package:motorparts_marketplace/theme/app_theme.dart';
@@ -55,7 +55,10 @@ class MyApp extends StatelessWidget {
       title: title,
       theme: AppTheme.lightTheme,
       // home: OnboardingPage() //LoginPage(),
-      home: LoginRegisterPage(),
+      // home: LoginRegisterPage(),
+      home: MyHomePage(
+        title: title,
+      ),
       //MyHomePage(title: title),
     );
   }

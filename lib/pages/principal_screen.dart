@@ -1,3 +1,5 @@
+// ignore_for_file: no_leading_underscores_for_local_identifiers
+
 import 'dart:io';
 
 import 'package:cached_network_image/cached_network_image.dart';
@@ -5,6 +7,7 @@ import 'package:card_swiper/card_swiper.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:motorparts_marketplace/minor_important_pages/article.dart';
+import 'package:motorparts_marketplace/widgets/most_selled_brand_widget.dart';
 
 const String loremIpsum = 'Lorem Ipsum is simply dummy text of the printing '
     'and typesetting industry. Lorem Ipsum has been the industry\'s standard '
@@ -50,6 +53,9 @@ class PrincipalScreen extends StatelessWidget {
           stretch: true,
           backgroundColor: Theme.of(context).primaryColor.withOpacity(0.80),
           expandedHeight: MediaQuery.of(context).size.height * 0.05,
+        ),
+        SliverMostSelledWidget(
+          brandRoute: Container(),
         ),
         SliverToBoxAdapter(
           child: Container(
