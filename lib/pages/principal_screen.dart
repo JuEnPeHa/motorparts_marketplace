@@ -44,6 +44,7 @@ class PrincipalScreen extends StatelessWidget {
     }
 
     return CustomScrollView(
+      shrinkWrap: true,
       slivers: [
         SliverAppBar(
           title: Text('Motorparts Marketplace'),
@@ -53,9 +54,21 @@ class PrincipalScreen extends StatelessWidget {
           stretch: true,
           backgroundColor: Theme.of(context).primaryColor.withOpacity(0.80),
           expandedHeight: MediaQuery.of(context).size.height * 0.05,
-        ),
-        SliverMostSelledWidget(
-          brandRoute: Container(),
+          actions: [
+            IconButton(
+              onPressed: () {
+                showSearch(
+                  context: context,
+                  delegate: ArticleSearch(),
+                );
+              },
+              icon: Icon(Icons.search),
+            ),
+            IconButton(
+              onPressed: () {},
+              icon: Icon(Icons.shopping_cart),
+            ),
+          ],
         ),
         SliverToBoxAdapter(
           child: Container(
@@ -100,6 +113,9 @@ class PrincipalScreen extends StatelessWidget {
               ),
             ),
           ),
+        ),
+        SliverMostSelledWidget(
+          brandRoute: Container(),
         ),
         SliverGrid(
           gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
@@ -186,6 +202,166 @@ class PrincipalScreen extends StatelessWidget {
           ),
         ),
       ],
+    );
+  }
+}
+
+class ArticleSearch extends SearchDelegate<String> {
+  final List<String> _articles = [
+    'Articulo 1',
+    'Articulo 2',
+    'Articulo 3',
+    'Articulo 4',
+    'Articulo 5',
+    'Articulo 6',
+    'Articulo 7',
+    'Articulo 8',
+    'Articulo 9',
+    'Articulo 10',
+    'Articulo 11',
+    'Articulo 12',
+    'Articulo 13',
+    'Articulo 14',
+    'Articulo 15',
+    'Articulo 16',
+    'Articulo 17',
+    'Articulo 18',
+    'Articulo 19',
+    'Articulo 20',
+    'Articulo 21',
+    'Articulo 22',
+    'Articulo 23',
+    'Articulo 24',
+    'Articulo 25',
+    'Articulo 26',
+    'Articulo 27',
+    'Articulo 28',
+    'Articulo 29',
+    'Articulo 30',
+    'Articulo 31',
+    'Articulo 32',
+    'Articulo 33',
+    'Articulo 34',
+    'Articulo 35',
+    'Articulo 36',
+    'Articulo 37',
+    'Articulo 38',
+    'Articulo 39',
+    'Articulo 40',
+    'Articulo 41',
+    'Articulo 42',
+    'Articulo 43',
+    'Articulo 44',
+    'Articulo 45',
+    'Articulo 46',
+    'Articulo 47',
+    'Articulo 48',
+    'Articulo 49',
+    'Articulo 50',
+    'Articulo 51',
+    'Articulo 52',
+    'Articulo 53',
+    'Articulo 54',
+    'Articulo 55',
+    'Articulo 56',
+    'Articulo 57',
+    'Articulo 58',
+    'Articulo 59',
+    'Articulo 60',
+    'Articulo 61',
+    'Articulo 62',
+    'Articulo 63',
+    'Articulo 64',
+    'Articulo 65',
+    'Articulo 66',
+    'Articulo 67',
+    'Articulo 68',
+  ];
+
+  @override
+  List<Widget> buildActions(BuildContext context) {
+    // Acciones del AppBar
+    return [
+      IconButton(
+        icon: Icon(Icons.clear),
+        onPressed: () {
+          query = '';
+        },
+      ),
+      IconButton(
+        icon: Icon(Icons.search),
+        onPressed: () {
+          print('Buscando...');
+        },
+      ),
+    ];
+  }
+
+  @override
+  Widget buildLeading(BuildContext context) {
+    // Icono a la izquierda del AppBar
+    return IconButton(
+      icon: AnimatedIcon(
+        icon: AnimatedIcons.menu_arrow,
+        progress: transitionAnimation,
+      ),
+      onPressed: () {
+        print('Leading icon pressed');
+        close(context, "null");
+      },
+    );
+  }
+
+  @override
+  Widget buildResults(BuildContext context) {
+    // Crea los resultados que vamos a mostrar
+    return Center(
+      child: Container(
+        height: 100,
+        width: 100,
+        color: Colors.blueAccent,
+        child: Text(query),
+      ),
+    );
+  }
+
+  @override
+  Widget buildSuggestions(BuildContext context) {
+    // Sugerencias que aparecen cuando la persona escribe
+    final List<String> suggestionList = query.isEmpty
+        ? _articles
+        : _articles
+            .where((element) => element.toLowerCase().startsWith(query))
+            .toList();
+
+    return ListView.builder(
+      itemCount: suggestionList.length,
+      itemBuilder: (context, index) {
+        return ListTile(
+          leading: Icon(Icons.shopping_cart),
+          title: RichText(
+            text: TextSpan(
+              text: suggestionList[index].substring(0, query.length),
+              style: TextStyle(
+                color: Colors.black,
+                fontWeight: FontWeight.bold,
+              ),
+              children: [
+                TextSpan(
+                  text: suggestionList[index].substring(query.length),
+                  style: TextStyle(
+                    color: Colors.grey,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          onTap: () {
+            print('Tocaste la sugerencia $index');
+            showResults(context);
+          },
+        );
+      },
     );
   }
 }

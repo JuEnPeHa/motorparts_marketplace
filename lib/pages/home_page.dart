@@ -1,8 +1,5 @@
-import 'dart:io';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:motorparts_marketplace/models/navigation_item.dart';
 import 'package:motorparts_marketplace/pages/busqueda_screen.dart';
 import 'package:motorparts_marketplace/pages/cart_screen.dart';
@@ -10,7 +7,7 @@ import 'package:motorparts_marketplace/pages/categories_page.dart';
 import 'package:motorparts_marketplace/pages/principal_screen.dart';
 import 'package:motorparts_marketplace/pages/profile_screen.dart';
 import 'package:motorparts_marketplace/providers/navigation_provider.dart';
-import 'package:motorparts_marketplace/widgets/build_item_bottom_nav_bar.dart';
+import 'package:motorparts_marketplace/widgets/bottom_nav_bar_widget.dart';
 import 'package:motorparts_marketplace/widgets/navigation_drawer_widget.dart';
 import 'package:provider/provider.dart';
 
@@ -156,76 +153,6 @@ class ButtonNavBar extends StatelessWidget {
           toggle();
         },
         splashColor: Colors.white,
-      ),
-    );
-  }
-}
-
-class BottomNavBar extends StatelessWidget {
-  const BottomNavBar(
-      {Key? key,
-      required this.width,
-      required this.height,
-      required this.listNavItems,
-      required this.navigationProvider})
-      : super(key: key);
-  final double width;
-  final double height;
-  final List<NavigationItem> listNavItems;
-  final NavigationProvider navigationProvider;
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      width: width,
-      height: height,
-      padding: const EdgeInsets.only(left: 10, right: 10),
-      decoration: BoxDecoration(
-          boxShadow: [
-            const BoxShadow(
-              color: Colors.white54,
-              offset: Offset(-2.5, -2.5),
-              blurRadius: 2.0,
-              spreadRadius: 0.5,
-            ),
-            BoxShadow(
-              color: Colors.grey.shade500,
-              offset: const Offset(2.5, 2.5),
-              blurRadius: 2.0,
-              spreadRadius: 0.5,
-            ),
-          ],
-          borderRadius: const BorderRadius.only(
-            topLeft: Radius.circular(15.0),
-            topRight: Radius.circular(15.0),
-            bottomLeft: Radius.circular(15.0),
-            bottomRight: Radius.circular(15.0),
-          ),
-          color: Colors.grey[300]),
-      child: Center(
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            ...listNavItems
-                .map(
-                  (i) => InkWell(
-                      onTap: () {
-                        if (Platform.isAndroid) {
-                          HapticFeedback.vibrate();
-                        }
-                        if (Platform.isIOS) {
-                          HapticFeedback.lightImpact();
-                        }
-                        navigationProvider.selectedIndex = (i.index);
-                        //navigationProvider.toggleIsCollapsed();
-                      },
-                      child: BuildNavItem(
-                        icon: i.icon,
-                      )),
-                )
-                .toList(),
-          ],
-        ),
       ),
     );
   }

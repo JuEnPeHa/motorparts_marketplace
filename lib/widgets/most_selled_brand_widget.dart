@@ -2,19 +2,17 @@ import 'package:flutter/material.dart';
 
 class SliverMostSelledWidget extends StatelessWidget {
   static const List<String> articleImages = [
-    'https://images.unsplash.com/photo-1612835362596-4b7b7b0b2b0b?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8bW90b3JwYXJ0cyUyMGFydCUyMGFydGljbGV8ZW58MHx8MHx8&ixlib=rb-1.2.1&w=1000&q=80',
-    'https://images.unsplash.com/photo-1612835362596-4b7b7b0b2b0b?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8bW90b3JwYXJ0cyUyMGFydCUyMGFydGljbGV8ZW58MHx8MHx8&ixlib=rb-1.2.1&w=1000&q=80',
-    'https://images.unsplash.com/photo-1612835362596-4b7b7b0b2b0b?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8bW90b3JwYXJ0cyUyMGFydCUyMGFydGljbGV8ZW58MHx8MHx8&ixlib=rb-1.2.1&w=1000&q=80',
-    'https://images.unsplash.com/photo-1612835362596-4b7b7b0b2b0b?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8bW90b3JwYXJ0cyUyMGFydCUyMGFydGljbGV8ZW58MHx8MHx8&ixlib=rb-1.2.1&w=1000&q=80',
-    'https://images.unsplash.com/photo-1612835362596-4b7b7b0b2b0b?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8bW90b3JwYXJ0cyUyMGFydCUyMGFydGljbGV8ZW58MHx8MHx8&ixlib=rb-1.2.1&w=1000&q=80',
+    'https://picsum.photos/200',
+    'https://picsum.photos/200',
+    'https://picsum.photos/200',
+    'https://picsum.photos/200',
   ];
 
   static const List<String> brandNames = [
-    'Brand 1',
-    'Brand 2',
-    'Brand 3',
-    'Brand 4',
-    'Brand 5',
+    'Italika',
+    'Vento',
+    'Dinamo',
+    'BMW',
   ];
 
   final Widget brandRoute;
@@ -25,54 +23,130 @@ class SliverMostSelledWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SliverAnimatedList(
-      initialItemCount: brandNames.length,
-      itemBuilder: (context, index, animation) {
-        return brandNames.isEmpty
-            ? const SliverToBoxAdapter(
-                child: Center(
-                  child: Text('No hay marcas disponibles'),
-                ),
-              )
-            : FadeTransition(
-                opacity: animation,
-                child: MostSelledWidget(),
-              );
-        // return FadeTransition(
-        //   opacity: animation,
-        //   child: MostSelledWidget(),
-        // );
-      },
+    return SliverToBoxAdapter(
+      child: Container(
+        height: 85,
+        width: double.infinity,
+        alignment: Alignment.center,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisSize: MainAxisSize.max,
+          children: brandNames.isEmpty
+              ? [
+                  Center(
+                    child: Text('No hay marcas disponibles'),
+                  )
+                ]
+              : brandNames
+                  .map(
+                    (e) => GestureDetector(
+                      onTap: () {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) => brandRoute,
+                          ),
+                        );
+                      },
+                      child: MostSelledWidget(
+                        articleImage: articleImages[brandNames.indexOf(e)],
+                        brandName: e,
+                      ),
+                    ),
+                  )
+                  .toList(),
+        ),
+      ),
     );
   }
 }
 
 class MostSelledWidget extends StatelessWidget {
-  const MostSelledWidget({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return const Placeholder();
-  }
-}
-
-class MostSelledPlaceholder extends StatelessWidget {
-  final List<String> articleImages = [
-    'https://images.unsplash.com/photo-1612835362596-4b7b7b0b2b0b?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8bW90b3JwYXJ0cyUyMGFydCUyMGFydGljbGV8ZW58MHx8MHx8&ixlib=rb-1.2.1&w=1000&q=80',
-    'https://images.unsplash.com/photo-1612835362596-4b7b7b0b2b0b?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8bW90b3JwYXJ0cyUyMGFydCUyMGFydGljbGV8ZW58MHx8MHx8&ixlib=rb-1.2.1&w=1000&q=80',
-    'https://images.unsplash.com/photo-1612835362596-4b7b7b0b2b0b?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8bW90b3JwYXJ0cyUyMGFydCUyMGFydGljbGV8ZW58MHx8MHx8&ixlib=rb-1.2.1&w=1000&q=80',
-    'https://images.unsplash.com/photo-1612835362596-4b7b7b0b2b0b?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8bW90b3JwYXJ0cyUyMGFydCUyMGFydGljbGV8ZW58MHx8MHx8&ixlib=rb-1.2.1&w=1000&q=80',
-    'https://images.unsplash.com/photo-1612835362596-4b7b7b0b2b0b?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8bW90b3JwYXJ0cyUyMGFydCUyMGFydGljbGV8ZW58MHx8MHx8&ixlib=rb-1.2.1&w=1000&q=80',
-  ];
-
-  final Widget brandRoute;
-  MostSelledPlaceholder({
+  final String articleImage;
+  final String brandName;
+  const MostSelledWidget({
     super.key,
-    required this.brandRoute,
+    required this.articleImage,
+    required this.brandName,
   });
 
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    const double heightAndWidth = 75;
+    final Size size = MediaQuery.of(context).size;
+    final double eachItemWidth = size.width / 5 - 10;
+    return NeumorphicContainer(
+      child: Container(
+          padding: const EdgeInsets.only(
+            left: 5,
+            right: 5,
+          ),
+          alignment: Alignment.center,
+          height: eachItemWidth,
+          width: eachItemWidth,
+          color: Colors.transparent,
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              ClipRRect(
+                borderRadius: const BorderRadius.only(
+                  topLeft: Radius.circular(25),
+                  topRight: Radius.circular(25),
+                  bottomLeft: Radius.circular(5),
+                  bottomRight: Radius.circular(5),
+                ),
+                child: Image.network(
+                  articleImage,
+                  height: 50,
+                  width: 50,
+                  alignment: Alignment.center,
+                  fit: BoxFit.cover,
+                ),
+              ),
+              FittedBox(
+                child: Text(
+                  brandName,
+                ),
+              ),
+            ],
+          )),
+    );
+  }
+}
+
+class NeumorphicContainer extends StatelessWidget {
+  // The Widget to be displayed inside the container in a Neumorphic way
+  final Widget child;
+  // The color of the seed of the Neumorphic effect; Should be grey or white?
+  final Color seedColor;
+  const NeumorphicContainer({
+    super.key,
+    required this.child,
+    this.seedColor = Colors.grey,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      decoration: BoxDecoration(
+        color: seedColor.withOpacity(0.15),
+        borderRadius: BorderRadius.circular(25),
+        boxShadow: [
+          BoxShadow(
+            color: seedColor.withOpacity(0.15),
+            spreadRadius: 1.5,
+            blurRadius: 1.5,
+            offset: const Offset(2, 2), // changes position of shadow
+          ),
+          BoxShadow(
+            color: seedColor.withOpacity(0.15),
+            spreadRadius: 1.5,
+            blurRadius: 1.5,
+            offset: const Offset(-2, -2), // changes position of shadow
+          ),
+        ],
+      ),
+      child: child,
+    );
   }
 }
