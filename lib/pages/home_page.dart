@@ -1,9 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:motorparts_marketplace/models/navigation_item.dart';
-import 'package:motorparts_marketplace/pages/busqueda_screen.dart';
 import 'package:motorparts_marketplace/pages/cart_screen.dart';
 import 'package:motorparts_marketplace/pages/categories_page.dart';
+import 'package:motorparts_marketplace/pages/old_cart_screen.dart';
 import 'package:motorparts_marketplace/pages/principal_screen.dart';
 import 'package:motorparts_marketplace/pages/profile_screen.dart';
 import 'package:motorparts_marketplace/providers/navigation_provider.dart';
@@ -39,9 +39,10 @@ class _MyHomePageState extends State<MyHomePage> {
   ];
   static List<Widget> _screens() => [
         PrincipalScreen(),
-        BusquedaScreen(),
-        CategoriesPage(),
+        // BusquedaScreen(),
         CartScreen(),
+        CategoriesPage(),
+        OldCartScreen(),
         ProfileScreen(),
       ];
 

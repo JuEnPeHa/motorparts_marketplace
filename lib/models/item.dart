@@ -101,6 +101,7 @@ class ItemInCart {
   final double price;
   int quantity;
   final int index;
+  final String productImageBase64;
 
   ItemInCart({
     required this.id,
@@ -109,6 +110,7 @@ class ItemInCart {
     required this.price,
     required this.quantity,
     required this.index,
+    this.productImageBase64 = '',
   });
 
   factory ItemInCart.fromJson(Map<String, dynamic> json) {
