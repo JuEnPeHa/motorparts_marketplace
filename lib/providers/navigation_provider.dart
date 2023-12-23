@@ -10,7 +10,7 @@ class NavigationProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  bool _navigationDrawerIsCollapsed = true;
+  bool _navigationDrawerIsCollapsed = false;
   bool get navigationDrawerIsCollapsed => _navigationDrawerIsCollapsed;
 
   // void toggleIsCollapsed() {

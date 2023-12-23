@@ -14,12 +14,19 @@ class NavigationDrawerWidget extends StatelessWidget {
     const padding = EdgeInsets.symmetric(vertical: 20);
     return SizedBox(
       width: isCollapsed
-          ? MediaQuery.of(context).size.width * 0.75
-          : MediaQuery.of(context).size.width * 0.25,
+          ? MediaQuery.of(context).size.width * 0.25
+          : MediaQuery.of(context).size.width * 0.75,
       //null,
       child: Drawer(
-        backgroundColor: const Color.fromARGB(255, 180, 152, 168),
-        elevation: 100,
+        // backgroundColor: const Color.fromARGB(255, 180, 152, 168),
+        backgroundColor:
+            Theme.of(context).primaryColor.withOpacity(0.95).withBlue(125),
+        elevation: 25,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(50),
+        ),
+        // clipBehavior: Clip.antiAliasWithSaveLayer,
+        surfaceTintColor: Colors.white,
         child: Column(
           children: [
             Container(
@@ -34,6 +41,16 @@ class NavigationDrawerWidget extends StatelessWidget {
               isCollapsed: isCollapsed,
               text: 'Home',
               icon: Icons.home,
+              onTap: () {
+                // navigationProvider.setNavigationIndex(0);
+                Navigator.of(context).pop();
+              },
+            ),
+            const SizedBox(height: 20),
+            BuildMenuItem(
+              isCollapsed: isCollapsed,
+              text: 'Categorias',
+              icon: Icons.category,
               onTap: () {
                 // navigationProvider.setNavigationIndex(0);
                 Navigator.of(context).pop();
@@ -67,7 +84,7 @@ class BuildMenuItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final color = Colors.white;
+    const color = Colors.white;
     final leading = Icon(icon, color: color);
     return Material(
       color: Colors.transparent,
@@ -78,7 +95,7 @@ class BuildMenuItem extends StatelessWidget {
             )
           : ListTile(
               leading: leading,
-              title: Text(text, style: TextStyle(color: color)),
+              title: Text(text, style: const TextStyle(color: color)),
               onTap: onTap,
             ),
     );
@@ -88,17 +105,18 @@ class BuildMenuItem extends StatelessWidget {
 class BuildCollapseIcon extends StatelessWidget {
   final bool isCollapsed;
   final BuildContext buildContext;
-  BuildCollapseIcon(
+  const BuildCollapseIcon(
       {Key? key, required this.buildContext, required this.isCollapsed})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     const double size = 52;
-    final icon = !isCollapsed ? Icons.arrow_forward_ios : Icons.arrow_back_ios;
+    final icon = isCollapsed ? Icons.arrow_forward_ios : Icons.arrow_back_ios;
     final Alignment alignment =
-        isCollapsed ? Alignment.center : Alignment.centerRight;
-    final EdgeInsets margin = EdgeInsets.only(right: isCollapsed ? 0 : 20);
+        isCollapsed ? Alignment.center : Alignment.centerLeft;
+    final EdgeInsets margin = EdgeInsets.only(
+        right: isCollapsed ? 0 : 25, left: isCollapsed ? 0 : 25);
     final double width = isCollapsed ? double.infinity : size;
 
     return Container(
@@ -126,7 +144,7 @@ class BuildCollapseIcon extends StatelessWidget {
 class BuildHeader extends StatelessWidget {
   final bool isCollapsed;
 
-  BuildHeader({required this.isCollapsed, Key? key}) : super(key: key);
+  const BuildHeader({required this.isCollapsed, Key? key}) : super(key: key);
   // ImageProvider logoColumn =
   //     const AssetImage('assets/logos_app/complete_logo_column.png');
   // ImageProvider logoRow =
@@ -134,9 +152,9 @@ class BuildHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return !isCollapsed
+    return isCollapsed
         ? const ClipRRect(
-            borderRadius: const BorderRadius.all(Radius.circular(25)),
+            borderRadius: BorderRadius.all(Radius.circular(25)),
             child: FlutterLogo(),
             // Image(
             //   image: logoColumn,
@@ -148,7 +166,7 @@ class BuildHeader extends StatelessWidget {
             children: [
               const SizedBox(width: 24),
               const ClipRRect(
-                borderRadius: const BorderRadius.all(Radius.circular(25)),
+                borderRadius: BorderRadius.all(Radius.circular(25)),
                 child: FlutterLogo(),
                 // Image(
                 //   image: logoColumn,
@@ -162,6 +180,7 @@ class BuildHeader extends StatelessWidget {
                 style: TextStyle(
                     fontSize: 24 /
                         ((MediaQuery.of(context).devicePixelRatio /
+                                // ignore: deprecated_member_use
                                 MediaQuery.of(context).textScaleFactor) *
                             0.75),
                     color: Colors.white,
