@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:motorparts_marketplace/pages/payment/payment_page.dart';
 
 class PaymentPage extends StatefulWidget {
   const PaymentPage({super.key});
@@ -175,107 +176,107 @@ class CardContainer extends StatelessWidget {
   }
 }
 
-class CardAddress extends StatelessWidget {
-  const CardAddress({
-    super.key,
-    required this.address,
-    required this.addressName,
-    required this.addressPhone,
-    required this.isChosen,
-    required this.changeAddressIndexChosen,
-  });
+// class CardAddress extends StatelessWidget {
+//   const CardAddress({
+//     super.key,
+//     required this.address,
+//     required this.addressName,
+//     required this.addressPhone,
+//     required this.isChosen,
+//     required this.changeAddressIndexChosen,
+//   });
 
-  final String address;
-  final String addressName;
-  final String addressPhone;
-  final bool isChosen;
-  final Function changeAddressIndexChosen;
+//   final String address;
+//   final String addressName;
+//   final String addressPhone;
+//   final bool isChosen;
+//   final Function changeAddressIndexChosen;
 
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {
-        changeAddressIndexChosen();
-      },
-      child: CardContainer(
-        child: Column(
-          children: [
-            Row(
-              children: [
-                Expanded(
-                  flex: 1,
-                  child: Radio(
-                    value: isChosen,
-                    groupValue: true,
-                    onChanged: (bool? value) {},
-                  ),
-                ),
-                Expanded(
-                  flex: 4,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        addressName,
-                        style: const TextStyle(
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      Text(address),
-                      Text(addressPhone),
-                    ],
-                  ),
-                ),
-                Expanded(
-                  flex: 1,
-                  child: IconButton(
-                    onPressed: () {},
-                    icon: const Icon(Icons.edit),
-                  ),
-                ),
-              ],
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}
+//   @override
+//   Widget build(BuildContext context) {
+//     return GestureDetector(
+//       onTap: () {
+//         changeAddressIndexChosen();
+//       },
+//       child: CardContainer(
+//         child: Column(
+//           children: [
+//             Row(
+//               children: [
+//                 Expanded(
+//                   flex: 1,
+//                   child: Radio(
+//                     value: isChosen,
+//                     groupValue: true,
+//                     onChanged: (bool? value) {},
+//                   ),
+//                 ),
+//                 Expanded(
+//                   flex: 4,
+//                   child: Column(
+//                     crossAxisAlignment: CrossAxisAlignment.start,
+//                     children: [
+//                       Text(
+//                         addressName,
+//                         style: const TextStyle(
+//                           fontWeight: FontWeight.bold,
+//                         ),
+//                       ),
+//                       Text(address),
+//                       Text(addressPhone),
+//                     ],
+//                   ),
+//                 ),
+//                 Expanded(
+//                   flex: 1,
+//                   child: IconButton(
+//                     onPressed: () {},
+//                     icon: const Icon(Icons.edit),
+//                   ),
+//                 ),
+//               ],
+//             ),
+//           ],
+//         ),
+//       ),
+//     );
+//   }
+// }
 
-class CardPaymentMethod extends StatelessWidget {
-  const CardPaymentMethod({
-    super.key,
-  });
+// class CardPaymentMethod extends StatelessWidget {
+//   const CardPaymentMethod({
+//     super.key, required String paymentMethodExpireDate,
+//   });
 
-  @override
-  Widget build(BuildContext context) {
-    return const Placeholder();
-  }
-}
+//   @override
+//   Widget build(BuildContext context) {
+//     return const Placeholder();
+//   }
+// }
 
-class Address {
-  final String address;
-  final String addressName;
-  final String addressPhone;
+// class Address {
+//   final String address;
+//   final String addressName;
+//   final String addressPhone;
 
-  Address({
-    required this.address,
-    required this.addressName,
-    required this.addressPhone,
-  });
-}
+//   Address({
+//     required this.address,
+//     required this.addressName,
+//     required this.addressPhone,
+//   });
+// }
 
-class PaymentMethodViewable {
-  final String paymentMethod;
-  final String paymentMethodNumber;
-  final String paymentMethodExpireDate;
+// class PaymentMethodViewable {
+//   final String paymentMethod;
+//   final String paymentMethodNumber;
+//   final String paymentMethodExpireDate;
 
-  PaymentMethodViewable({
-    required this.paymentMethod,
-    required this.paymentMethodNumber,
-    required this.paymentMethodExpireDate,
-  });
-}
+//   PaymentMethodViewable({
+//     required this.paymentMethod,
+//     required this.paymentMethodNumber,
+//     required this.paymentMethodExpireDate,
+//   });
+// }
 
 /// The possible page view indexes are 0, 1, 2
 /// 0: Payment methods

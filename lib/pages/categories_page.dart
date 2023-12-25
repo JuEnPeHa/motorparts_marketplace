@@ -60,6 +60,21 @@ const List<String> bmwModels = [
   'R1250R',
 ];
 
+DropdownMenuItem<String> buildMenuItem(String value) {
+  return DropdownMenuItem<String>(
+    value: value,
+    child: Text(value),
+  );
+}
+
+List<DropdownMenuItem<String>> buildDropdownMenuItems(List<String> listItems) {
+  List<DropdownMenuItem<String>> items = [];
+  for (String listItem in listItems) {
+    items.add(buildMenuItem(listItem));
+  }
+  return items;
+}
+
 class CategoriesPage extends StatefulWidget {
   const CategoriesPage({super.key});
 
@@ -89,51 +104,32 @@ class _CategoriesPageState extends State<CategoriesPage> {
     return Scaffold(
       body: SafeArea(
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          // mainAxisAlignment: MainAxisAlignment.center,
           children: [
             DropdownButton<String>(
               value: selectedBrand,
               hint: const Text('Selecciona una marca'),
               onChanged: _onBrandChanged,
               items: brandNames.map((String value) {
-                return DropdownMenuItem<String>(
-                  value: value,
-                  child: Text(value),
-                );
+                return buildMenuItem(value);
               }).toList(),
             ),
             DropdownButton<String>(
               value: selectedModel,
               hint: const Text('Selecciona un modelo'),
               onChanged: _onModelChanged,
-              items: selectedBrand == 'Italika'
-                  ? italikaModels.map((String value) {
-                      return DropdownMenuItem<String>(
-                        value: value,
-                        child: Text(value),
-                      );
-                    }).toList()
-                  : selectedBrand == 'Vento'
-                      ? ventoModels.map((String value) {
-                          return DropdownMenuItem<String>(
-                            value: value,
-                            child: Text(value),
-                          );
-                        }).toList()
-                      : selectedBrand == 'Dinamo'
-                          ? dinamoModels.map((String value) {
-                              return DropdownMenuItem<String>(
-                                value: value,
-                                child: Text(value),
-                              );
-                            }).toList()
-                          : selectedBrand == 'BMW'
-                              ? bmwModels.map((String value) {
-                                  return DropdownMenuItem<String>(
-                                    value: value,
-                                    child: Text(value),
-                                  );
-                                }).toList()
-                              : null,
+              items: selectedBrand != null
+                  ? selectedBrand == 'Italika'
+                      ? buildDropdownMenuItems(italikaModels)
+                      : selectedBrand == 'Vento'
+                          ? buildDropdownMenuItems(ventoModels)
+                          : selectedBrand == 'Dinamo'
+                              ? buildDropdownMenuItems(dinamoModels)
+                              : selectedBrand == 'BMW'
+                                  ? buildDropdownMenuItems(bmwModels)
+                                  : null
+                  : null,
             ),
           ],
         ),

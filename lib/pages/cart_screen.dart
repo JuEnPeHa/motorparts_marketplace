@@ -41,18 +41,19 @@ class CartScreen extends StatelessWidget {
         color: Theme.of(context).primaryColor.withOpacity(0.1),
         child: SafeArea(
           child: Column(children: [
+            // Expanded(
+            //   child: ColoredBox(
+            //     color: Colors.black,
+            //   ),
+            // ),
+            // Center(
+            //   child: Text(
+            //     'Carrito',
+            //     style: Theme.of(context).textTheme.headline1,
+            //   ),
+            // ),
             Expanded(
-              child: ColoredBox(
-                color: Colors.black,
-              ),
-            ),
-            Center(
-              child: Text(
-                'Carrito',
-                style: Theme.of(context).textTheme.headline1,
-              ),
-            ),
-            Expanded(
+              flex: 5,
               child: ListView(
                 children: [
                   // CardOrderSummaryPaymentAndAddress(
@@ -76,10 +77,38 @@ class CartScreen extends StatelessWidget {
                           cartProvider.items[i].quantity.toString(),
                       productImageBase64:
                           cartProvider.items[i].productImageBase64,
+                      addProduct: () {
+                        cartProvider.incrementQuantity(
+                          cartProvider.items[i],
+                        );
+                      },
+                      removeProduct: () {
+                        cartProvider.removeSingleQuantity(
+                          cartProvider.items[i],
+                        );
+                      },
+                      deleteProduct: () {
+                        cartProvider.removeItem(
+                          cartProvider.items[i],
+                        );
+                      },
                     ),
                 ],
               ),
             ),
+            CardContainer(
+                child: Container(
+                    color: Colors.transparent,
+                    height: 50,
+                    width: double.infinity,
+                    child: Text(
+                      'Total: \$${cartProvider.totalPrice}',
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                      ),
+                      textAlign: TextAlign.center,
+                    ))),
             CardContainer(
                 child: Container(
               color: Colors.red,
@@ -104,12 +133,18 @@ class CartProduct extends StatelessWidget {
     required this.productPrice,
     required this.productQuantity,
     required this.productImageBase64,
+    required this.addProduct,
+    required this.removeProduct,
+    required this.deleteProduct,
   });
 
   final String productName;
   final String productPrice;
   final String productQuantity;
   final String productImageBase64;
+  final Function() addProduct;
+  final Function() removeProduct;
+  final Function() deleteProduct;
 
   @override
   Widget build(BuildContext context) {
@@ -135,9 +170,48 @@ class CartProduct extends StatelessWidget {
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                Text(productPrice),
-                Text(productQuantity),
+                Text(
+                  'Precio: \$$productPrice',
+                ),
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(25),
+                  child: ConstrainedBox(
+                    constraints: BoxConstraints.tightFor(width: 50),
+                    child: Container(
+                      color: Colors.red.withOpacity(0.75),
+                      child: Text(
+                        "${productQuantity}",
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                          // fontStyle: FontStyle.italic,
+                        ),
+                        textAlign: TextAlign.center,
+                      ),
+                    ),
+                  ),
+                ),
+                // Text(productQuantity),
               ],
+            ),
+          ),
+          SizedBox(width: 10),
+          Expanded(
+            flex: 1,
+            child: Container(
+              color: Colors.red.withOpacity(0.25),
+              child: Column(
+                children: [
+                  IconButton(
+                    icon: Icon(Icons.add),
+                    onPressed: addProduct,
+                  ),
+                  IconButton(
+                    icon: Icon(Icons.remove),
+                    onPressed: removeProduct,
+                  ),
+                ],
+              ),
             ),
           ),
         ],
