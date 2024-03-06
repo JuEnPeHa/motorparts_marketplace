@@ -2,16 +2,20 @@ import 'package:flutter/material.dart';
 
 class CardContainer extends StatelessWidget {
   final Widget child;
+  final EdgeInsets padding;
+  final EdgeInsets margin;
   const CardContainer({
     super.key,
     required this.child,
+    this.padding = const EdgeInsets.all(10),
+    this.margin = const EdgeInsets.all(10),
   });
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.all(10),
-      padding: const EdgeInsets.all(10),
+      margin: margin,
+      padding: padding,
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(10),

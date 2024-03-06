@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:motorparts_marketplace/pages/ir_al_catalogo_page/ir_al_catalogo_page.dart';
+import 'package:motorparts_marketplace/pages/payment/widgets/text_line_footer_widget.dart';
 
 /// The possible page view indexes are 0, 1, 2
 /// 0: Payment methods

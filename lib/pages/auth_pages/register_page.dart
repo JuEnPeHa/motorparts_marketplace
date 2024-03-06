@@ -1,7 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:motorparts_marketplace/pages/auth_pages/bloc/user_auth_bloc.dart';
 import 'package:motorparts_marketplace/pages/home_page.dart';
 
@@ -206,8 +204,8 @@ class _BuildRegisterBtn extends StatelessWidget {
           UserAuthFun.changeIndex(0, context);
         },
         style: ElevatedButton.styleFrom(
-          primary: Colors.white,
-          onPrimary: Colors.black,
+          // primary: Colors.white,
+          // onPrimary: Colors.black,
           shadowColor: Colors.black,
           elevation: 5,
           padding: const EdgeInsets.all(15.0),

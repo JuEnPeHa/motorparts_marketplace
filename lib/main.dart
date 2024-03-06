@@ -6,7 +6,6 @@ import 'package:motorparts_marketplace/pages/categories_page/bloc/model_and_bran
 import 'package:motorparts_marketplace/pages/home_page.dart';
 import 'package:motorparts_marketplace/providers/cart_provider.dart';
 import 'package:motorparts_marketplace/providers/navigation_provider.dart';
-import 'package:motorparts_marketplace/theme/app_theme.dart';
 import 'package:provider/provider.dart';
 
 void main() async {
@@ -57,12 +56,20 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       showPerformanceOverlay: false,
       title: title,
-      theme: AppTheme.lightTheme,
+      theme: ThemeData(
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: Color(0xFF219EBC),
+        ),
+        useMaterial3: true,
+      ),
       // home: OnboardingPage() //LoginPage(),
       // home: LoginRegisterPage(),
       home: MyHomePage(
         title: title,
       ),
+      // home: Scaffold(
+      //   body: PaymentPage(),
+      // ),
       //MyHomePage(title: title),
     );
   }

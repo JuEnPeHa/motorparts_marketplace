@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
-import 'package:motorparts_marketplace/pages/ir_al_catalogo_page/ir_al_catalogo_page.dart';
-import 'package:motorparts_marketplace/pages/payment/payment_page.dart';
+import 'package:motorparts_marketplace/pages/payment/models/address_model.dart';
+import 'package:motorparts_marketplace/pages/payment/widgets/card_address.dart';
 
 class PageViewAddressMethod extends StatefulWidget {
   const PageViewAddressMethod({
@@ -62,16 +62,6 @@ class _PageViewAddressMethodState extends State<PageViewAddressMethod> {
                       },
                     ),
                 ],
-              ),
-            ),
-            CardContainer(
-              child: Container(
-                height: 50,
-                width: double.infinity,
-                child: CupertinoButton(
-                  onPressed: () {},
-                  child: const Text('Add new Address'),
-                ),
               ),
             ),
           ],

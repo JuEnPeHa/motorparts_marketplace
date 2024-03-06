@@ -1,8 +1,12 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:motorparts_marketplace/pages/ir_al_catalogo_page/ir_al_catalogo_page.dart';
+import 'package:motorparts_marketplace/pages/payment/page_views_payment_page/page_view_address_method.dart';
 import 'package:motorparts_marketplace/pages/payment/page_views_payment_page/page_view_order_summary.dart';
+import 'package:motorparts_marketplace/pages/payment/page_views_payment_page/page_view_payment_method.dart';
+import 'package:motorparts_marketplace/pages/payment/widgets/header_and_footer_widget.dart';
+import 'package:motorparts_marketplace/pages/payment/widgets/add_new_and_select_button.dart';
+import 'package:motorparts_marketplace/widgets/card_container.dart';
 
 class PaymentPage extends StatefulWidget {
   const PaymentPage({super.key});
@@ -12,7 +16,7 @@ class PaymentPage extends StatefulWidget {
 }
 
 class _PaymentPageState extends State<PaymentPage> {
-  int pageViewIndex = 2;
+  int pageViewIndex = 0;
   late final PageController pageController;
 
   @override
@@ -31,15 +35,15 @@ class _PaymentPageState extends State<PaymentPage> {
         child: SafeArea(
           child: Column(
             children: [
-              PaymentHeader(pageViewIndex: 2),
+              PaymentHeader(pageViewIndex: pageViewIndex),
               Expanded(
                 child: PageView(
                   controller: pageController,
-                  // onPageChanged: (int index) {
-                  //   setState(() {
-                  //     pageViewIndex = index;
-                  //   });
-                  // },
+                  onPageChanged: (int index) {
+                    setState(() {
+                      pageViewIndex = index;
+                    });
+                  },
                   physics: const NeverScrollableScrollPhysics(),
                   scrollBehavior: const MaterialScrollBehavior().copyWith(
                     scrollbars: false,
@@ -54,143 +58,54 @@ class _PaymentPageState extends State<PaymentPage> {
                   ],
                 ),
               ),
-              PaymentFooter(),
+              AddNewAndSelectButton(
+                actualPageViewIndex: pageViewIndex,
+                lengthOfAddressesOrPaymentMethods: 3, // addresses?.length ?? 0,
+                onPressedAddNewButton: () {
+                  if (pageViewIndex == 0) {
+                    // Navigator.push(
+                    //   context,
+                    //   MaterialPageRoute(
+                    //     builder: (context) => AddNewCardPage(),
+                    //   ),
+                    // );
+                  } else if (pageViewIndex == 1) {
+                    // Navigator.push(
+                    //   context,
+                    //   MaterialPageRoute(
+                    //     builder: (context) => AddNewAddressPage(),
+                    //   ),
+                    // );
+                  }
+                },
+                onPressedSelectButton: () {
+                  // for now just navigate to next pageview
+                  pageController.nextPage(
+                    duration: const Duration(milliseconds: 300),
+                    curve: Curves.easeInOut,
+                  );
+                  if (pageViewIndex == 0) {
+                    // Navigator.push(
+                    //   context,
+                    //   MaterialPageRoute(
+                    //     builder: (context) => SelectCardPage(),
+                    //   ),
+                    // );
+                  } else if (pageViewIndex == 1) {
+                    // Navigator.push(
+                    //   context,
+                    //   MaterialPageRoute(
+                    //     builder: (context) => SelectAddressPage(),
+                    //   ),
+                    // );
+                  }
+                },
+              ),
+              pageViewIndex == 2
+                  ? const SizedBox.shrink()
+                  : const PaymentFooter(),
             ],
           ),
-        ),
-      ),
-    );
-  }
-}
-
-class CardAddress extends StatelessWidget {
-  const CardAddress({
-    super.key,
-    required this.address,
-    required this.addressName,
-    required this.addressPhone,
-    required this.isChosen,
-    required this.changeAddressIndexChosen,
-  });
-
-  final String address;
-  final String addressName;
-  final String addressPhone;
-  final bool isChosen;
-  final Function changeAddressIndexChosen;
-
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {
-        changeAddressIndexChosen();
-      },
-      child: CardContainer(
-        child: Column(
-          children: [
-            Row(
-              children: [
-                Expanded(
-                  flex: 1,
-                  child: Radio(
-                    value: isChosen,
-                    groupValue: true,
-                    onChanged: (bool? value) {},
-                  ),
-                ),
-                Expanded(
-                  flex: 4,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        addressName,
-                        style: const TextStyle(
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      Text(address),
-                      Text(addressPhone),
-                    ],
-                  ),
-                ),
-                Expanded(
-                  flex: 1,
-                  child: IconButton(
-                    onPressed: () {},
-                    icon: const Icon(Icons.edit),
-                  ),
-                ),
-              ],
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-class CardPaymentMethod extends StatelessWidget {
-  const CardPaymentMethod({
-    super.key,
-    required this.paymentMethod,
-    required this.paymentMethodNumber,
-    required this.paymentMethodExpireDate,
-    required this.isChosen,
-    required this.changePaymentMethodIndexChosen,
-  });
-
-  final String paymentMethod;
-  final String paymentMethodNumber;
-  final String paymentMethodExpireDate;
-  final bool isChosen;
-  final Function changePaymentMethodIndexChosen;
-
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {
-        changePaymentMethodIndexChosen();
-      },
-      child: CardContainer(
-        child: Column(
-          children: [
-            Row(
-              children: [
-                Expanded(
-                  flex: 1,
-                  child: Radio(
-                    value: isChosen,
-                    groupValue: true,
-                    onChanged: (bool? value) {},
-                  ),
-                ),
-                Expanded(
-                  flex: 4,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        paymentMethod,
-                        style: const TextStyle(
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      Text(paymentMethodNumber),
-                      Text(paymentMethodExpireDate),
-                    ],
-                  ),
-                ),
-                Expanded(
-                  flex: 1,
-                  child: IconButton(
-                    onPressed: () {},
-                    icon: const Icon(Icons.edit),
-                  ),
-                ),
-              ],
-            ),
-          ],
         ),
       ),
     );
@@ -339,11 +254,11 @@ class CardOrderSummaryPaymentAndAddress extends StatelessWidget {
           ),
           Row(
             children: [
-              Expanded(
+              const Expanded(
                 flex: 1,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  children: const [
+                  children: [
                     Text(
                       'Subtotal',
                       style: TextStyle(
@@ -389,42 +304,4 @@ class CardOrderSummaryPaymentAndAddress extends StatelessWidget {
       ),
     );
   }
-}
-
-class Address {
-  final String address;
-  final String addressName;
-  final String addressPhone;
-
-  Address({
-    required this.address,
-    required this.addressName,
-    required this.addressPhone,
-  });
-}
-
-class PaymentMethodViewable {
-  final String paymentMethod;
-  final String paymentMethodNumber;
-  final String paymentMethodExpireDate;
-
-  PaymentMethodViewable({
-    required this.paymentMethod,
-    required this.paymentMethodNumber,
-    required this.paymentMethodExpireDate,
-  });
-}
-
-class Product {
-  final String productName;
-  final String productPrice;
-  final String productQuantity;
-  final String productImageBase64;
-
-  Product({
-    required this.productName,
-    required this.productPrice,
-    required this.productQuantity,
-    required this.productImageBase64,
-  });
 }

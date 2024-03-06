@@ -21,20 +21,14 @@ final class ModelAndBrandInitialState extends ModelAndBrandState {
 
 final class ModelAndBrandModelSelectedState extends ModelAndBrandState {
   const ModelAndBrandModelSelectedState({
-    required String model,
-    required String brand,
-  }) : super(
-          model: model,
-          brand: brand,
-        );
+    required super.model,
+    required super.brand,
+  });
 }
 
 final class ModelAndBrandBrandSelectedState extends ModelAndBrandState {
   const ModelAndBrandBrandSelectedState({
-    required String model,
-    required String brand,
-  }) : super(
-          model: model,
-          brand: brand,
-        );
+    required super.model,
+    required super.brand,
+  });
 }

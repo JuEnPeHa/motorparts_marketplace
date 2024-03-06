@@ -7,6 +7,7 @@ import 'package:card_swiper/card_swiper.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:motorparts_marketplace/minor_important_pages/article.dart';
+import 'package:motorparts_marketplace/pages/cart_screen.dart';
 import 'package:motorparts_marketplace/widgets/most_selled_brand_widget.dart';
 
 const String loremIpsum = 'Lorem Ipsum is simply dummy text of the printing '
@@ -65,7 +66,11 @@ class PrincipalScreen extends StatelessWidget {
               icon: Icon(Icons.search),
             ),
             IconButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context) {
+                  return CartScreen();
+                }));
+              },
               icon: Icon(Icons.shopping_cart),
             ),
           ],

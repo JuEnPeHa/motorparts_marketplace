@@ -1,7 +1,6 @@
-import 'dart:convert';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:motorparts_marketplace/pages/payment/payment_page.dart';
 import 'package:motorparts_marketplace/providers/cart_provider.dart';
 import 'package:motorparts_marketplace/widgets/card_container.dart';
 import 'package:provider/provider.dart';
@@ -12,27 +11,35 @@ class CartScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final CartProvider cartProvider = Provider.of<CartProvider>(context);
+    final ThemeData theme = Theme.of(context);
 
     return Scaffold(
       extendBody: true,
       appBar: AppBar(
-        backgroundColor: Colors.red.withOpacity(0.75),
+        backgroundColor: theme.primaryColor,
         elevation: 0,
         title: Text(
           'Carrito',
           style: TextStyle(
             fontSize: 24,
             fontWeight: FontWeight.bold,
+            color: theme.colorScheme.onPrimary,
           ),
         ),
         centerTitle: true,
         leading: IconButton(
-          icon: Icon(Icons.arrow_back),
+          icon: Icon(
+            Icons.arrow_back,
+            color: theme.colorScheme.onPrimary,
+          ),
           onPressed: () => Navigator.pop(context),
         ),
         actions: [
           IconButton(
-            icon: Icon(Icons.shopping_cart),
+            icon: Icon(
+              Icons.shopping_cart,
+              color: theme.colorScheme.onPrimary,
+            ),
             onPressed: () => Navigator.pushNamed(context, '/cart'),
           ),
         ],
@@ -75,8 +82,7 @@ class CartScreen extends StatelessWidget {
                       productPrice: cartProvider.items[i].price.toString(),
                       productQuantity:
                           cartProvider.items[i].quantity.toString(),
-                      productImageBase64:
-                          cartProvider.items[i].productImageBase64,
+                      productImageUrl: cartProvider.items[i].image,
                       addProduct: () {
                         cartProvider.incrementQuantity(
                           cartProvider.items[i],
@@ -111,12 +117,20 @@ class CartScreen extends StatelessWidget {
                     ))),
             CardContainer(
                 child: Container(
-              color: Colors.red,
+              color: theme.colorScheme.primary,
               height: 50,
               width: double.infinity,
               child: CupertinoButton(
-                child: const Text('Pagar ahora'),
-                onPressed: () {},
+                child: Text(
+                  'Pagar ahora',
+                  style: TextStyle(
+                    color: theme.colorScheme.onPrimary,
+                  ),
+                ),
+                onPressed: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => PaymentPage()));
+                },
               ),
             )),
           ]),
@@ -132,7 +146,8 @@ class CartProduct extends StatelessWidget {
     required this.productName,
     required this.productPrice,
     required this.productQuantity,
-    required this.productImageBase64,
+    required this.productImageUrl,
+    // required this.productImageBase64,
     required this.addProduct,
     required this.removeProduct,
     required this.deleteProduct,
@@ -141,7 +156,8 @@ class CartProduct extends StatelessWidget {
   final String productName;
   final String productPrice;
   final String productQuantity;
-  final String productImageBase64;
+  final String productImageUrl;
+  // final String productImageBase64;
   final Function() addProduct;
   final Function() removeProduct;
   final Function() deleteProduct;
@@ -153,8 +169,8 @@ class CartProduct extends StatelessWidget {
         children: [
           Expanded(
             flex: 1,
-            child: Image.memory(
-              base64Decode(productImageBase64),
+            child: Image.network(
+              productImageUrl,
               fit: BoxFit.cover,
             ),
           ),

@@ -82,73 +82,50 @@ class CategoriesPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final ThemeData theme = Theme.of(context);
     return Scaffold(
-      body: SafeArea(
-        child: CustomScrollView(
-          slivers: [
-            SliverAppBar(
-              flexibleSpace: FlexibleSpaceBar(
-                background: HeaderCategories(
-                  modelCallback: (String? model) {
-                    print(model);
-                  },
-                ),
+      body: CustomScrollView(
+        slivers: [
+          SliverAppBar(
+            flexibleSpace: FlexibleSpaceBar(
+              background: Container(
+                color: theme.colorScheme.primary,
               ),
+              title: const Text('Categorías'),
+              centerTitle: true,
             ),
-            BlocBuilder<ModelAndBrandBloc, ModelAndBrandState>(
-              builder: (context, state) {
-                if (state is ModelAndBrandInitialState) {
-                  return Container(
+          ),
+          SliverToBoxAdapter(
+            child: HeaderCategories(
+              modelCallback: (String? model) {
+                print(model);
+              },
+            ),
+          ),
+          BlocBuilder<ModelAndBrandBloc, ModelAndBrandState>(
+            builder: (context, state) {
+              if (state is ModelAndBrandInitialState) {
+                return SliverToBoxAdapter(
+                  child: Container(
                     alignment: Alignment.center,
                     child: const Text('Selecciona una marca y un modelo'),
-                  );
-                  // return SliverList(
-                  //   delegate: SliverChildBuilderDelegate(
-                  //     (BuildContext context, int index) {
-                  //       return Container(
-                  //         height: 100,
-                  //         color: Colors.amber[100 * (index % 9)],
-                  //         child: Center(
-                  //           child: Text('Item $index'),
-                  //         ),
-                  //       );
-                  //     },
-                  //     childCount: 20,
-                  //   ),
-                  // );
-                } else if (state is ModelAndBrandModelSelectedState) {
-                  return SliverList(
-                    delegate: SliverChildBuilderDelegate(
-                      (BuildContext context, int index) {
-                        return Container(
-                          height: 100,
-                          color: Colors.amber[100 * (index % 9)],
-                          child: Center(
-                            child: Text(
-                                'Item $index + ${state.model} + ${state.brand}'),
-                          ),
-                        );
-                      },
-                      childCount: 20,
-                    ),
-                  );
-                } else if (state is ModelAndBrandBrandSelectedState) {
-                  return SliverList(
-                    delegate: SliverChildBuilderDelegate(
-                      (BuildContext context, int index) {
-                        return Container(
-                          height: 100,
-                          color: Colors.amber[100 * (index % 9)],
-                          child: Center(
-                            child: Text(
-                                'Item $index + ${state.model} + ${state.brand}'),
-                          ),
-                        );
-                      },
-                      childCount: 20,
-                    ),
-                  );
-                }
+                  ),
+                );
+                // return SliverList(
+                //   delegate: SliverChildBuilderDelegate(
+                //     (BuildContext context, int index) {
+                //       return Container(
+                //         height: 100,
+                //         color: Colors.amber[100 * (index % 9)],
+                //         child: Center(
+                //           child: Text('Item $index'),
+                //         ),
+                //       );
+                //     },
+                //     childCount: 20,
+                //   ),
+                // );
+              } else if (state is ModelAndBrandModelSelectedState) {
                 return SliverList(
                   delegate: SliverChildBuilderDelegate(
                     (BuildContext context, int index) {
@@ -156,17 +133,48 @@ class CategoriesPage extends StatelessWidget {
                         height: 100,
                         color: Colors.amber[100 * (index % 9)],
                         child: Center(
-                          child: Text('Item $index'),
+                          child: Text(
+                              'Item $index + ${state.model} + ${state.brand}'),
                         ),
                       );
                     },
                     childCount: 20,
                   ),
                 );
-              },
-            ),
-          ],
-        ),
+              } else if (state is ModelAndBrandBrandSelectedState) {
+                return SliverList(
+                  delegate: SliverChildBuilderDelegate(
+                    (BuildContext context, int index) {
+                      return Container(
+                        height: 100,
+                        color: Colors.amber[100 * (index % 9)],
+                        child: Center(
+                          child: Text(
+                              'Item $index + ${state.model} + ${state.brand}'),
+                        ),
+                      );
+                    },
+                    childCount: 20,
+                  ),
+                );
+              }
+              return SliverList(
+                delegate: SliverChildBuilderDelegate(
+                  (BuildContext context, int index) {
+                    return Container(
+                      height: 100,
+                      color: Colors.amber[100 * (index % 9)],
+                      child: Center(
+                        child: Text('Item $index'),
+                      ),
+                    );
+                  },
+                  childCount: 20,
+                ),
+              );
+            },
+          ),
+        ],
       ),
     );
   }

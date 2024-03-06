@@ -1,6 +1,6 @@
-import 'package:flutter/cupertino.dart';
-import 'package:motorparts_marketplace/pages/ir_al_catalogo_page/ir_al_catalogo_page.dart';
-import 'package:motorparts_marketplace/pages/payment/payment_page.dart';
+import 'package:flutter/material.dart';
+import 'package:motorparts_marketplace/pages/payment/models/payment_viewable_model.dart';
+import 'package:motorparts_marketplace/widgets/card_container.dart';
 
 class PageViewPaymentMethod extends StatefulWidget {
   const PageViewPaymentMethod({super.key});
@@ -66,15 +66,72 @@ class _PageViewPaymentMethodState extends State<PageViewPaymentMethod> {
                 ],
               ),
             ),
-            CardContainer(
-              child: Container(
-                height: 50,
-                width: double.infinity,
-                child: CupertinoButton(
-                  onPressed: () {},
-                  child: const Text('Add new Payment Method'),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class CardPaymentMethod extends StatelessWidget {
+  const CardPaymentMethod({
+    super.key,
+    required this.paymentMethod,
+    required this.paymentMethodNumber,
+    required this.paymentMethodExpireDate,
+    required this.isChosen,
+    required this.changePaymentMethodIndexChosen,
+  });
+
+  final String paymentMethod;
+  final String paymentMethodNumber;
+  final String paymentMethodExpireDate;
+  final bool isChosen;
+  final Function changePaymentMethodIndexChosen;
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () {
+        changePaymentMethodIndexChosen();
+      },
+      child: CardContainer(
+        child: Column(
+          children: [
+            Row(
+              children: [
+                Expanded(
+                  flex: 1,
+                  child: Radio(
+                    value: isChosen,
+                    groupValue: true,
+                    onChanged: (bool? value) {},
+                  ),
                 ),
-              ),
+                Expanded(
+                  flex: 4,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        paymentMethod,
+                        style: const TextStyle(
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      Text(paymentMethodNumber),
+                      Text(paymentMethodExpireDate),
+                    ],
+                  ),
+                ),
+                Expanded(
+                  flex: 1,
+                  child: IconButton(
+                    onPressed: () {},
+                    icon: const Icon(Icons.edit),
+                  ),
+                ),
+              ],
             ),
           ],
         ),

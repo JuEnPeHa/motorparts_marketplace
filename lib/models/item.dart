@@ -101,7 +101,7 @@ class ItemInCart {
   final double price;
   int quantity;
   final int index;
-  final String productImageBase64;
+  // final String productImageBase64;
 
   ItemInCart({
     required this.id,
@@ -110,7 +110,7 @@ class ItemInCart {
     required this.price,
     required this.quantity,
     required this.index,
-    this.productImageBase64 = '',
+    // required this.productImageBase64,
   });
 
   factory ItemInCart.fromJson(Map<String, dynamic> json) {
@@ -121,6 +121,7 @@ class ItemInCart {
       price: json['price'],
       quantity: json['quantity'],
       index: json['index'],
+      // productImageBase64: json['productImageBase64'],
     );
   }
 
@@ -132,6 +133,7 @@ class ItemInCart {
       'price': price,
       'quantity': quantity,
       'index': index,
+      // 'productImageBase64': productImageBase64,
     };
   }
 
@@ -151,6 +153,8 @@ class ItemInCart {
           price == other.price &&
           quantity == other.quantity &&
           index == other.index;
+  // &&
+  // productImageBase64 == other.productImageBase64;
 
   @override
   int get hashCode =>
@@ -160,4 +164,29 @@ class ItemInCart {
       price.hashCode ^
       quantity.hashCode ^
       index.hashCode;
+  // ^
+  // productImageBase64.hashCode;
+
+  double get total => price * quantity;
+
+  // copyWith
+  ItemInCart copyWith({
+    String? id,
+    String? name,
+    String? image,
+    double? price,
+    int? quantity,
+    int? index,
+    String? productImageBase64,
+  }) {
+    return ItemInCart(
+      id: id ?? this.id,
+      name: name ?? this.name,
+      image: image ?? this.image,
+      price: price ?? this.price,
+      quantity: quantity ?? this.quantity,
+      index: index ?? this.index,
+      // productImageBase64: productImageBase64 ?? this.productImageBase64,
+    );
+  }
 }

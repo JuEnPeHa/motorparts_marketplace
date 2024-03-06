@@ -1,13 +1,17 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:motorparts_marketplace/pages/ir_al_catalogo_page/ir_al_catalogo_page.dart';
+import 'package:motorparts_marketplace/pages/payment/models/address_model.dart';
+import 'package:motorparts_marketplace/pages/payment/models/payment_viewable_model.dart';
+import 'package:motorparts_marketplace/pages/payment/models/product_model.dart';
 import 'package:motorparts_marketplace/pages/payment/payment_page.dart';
+import 'package:motorparts_marketplace/widgets/card_container.dart';
 
 class PageViewOrderSummary extends StatelessWidget {
   const PageViewOrderSummary({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final ThemeData theme = Theme.of(context);
     final List<Product> products = [
       Product(
         productName: 'Product 1',
@@ -75,12 +79,27 @@ class PageViewOrderSummary extends StatelessWidget {
             ),
           ),
           CardContainer(
+              // padding: EdgeInsets.all(0),
               child: Container(
-            color: Colors.red,
+            alignment: Alignment.center,
+            decoration: BoxDecoration(
+              color: theme.colorScheme.primary,
+              borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(20),
+                topRight: Radius.circular(20),
+              ),
+            ),
             height: 50,
             width: double.infinity,
             child: CupertinoButton(
-              child: const Text('Pagar ahora'),
+              child: FittedBox(
+                child: Text(
+                  'Pagar ahora',
+                  style: TextStyle(
+                    color: theme.colorScheme.onPrimary,
+                  ),
+                ),
+              ),
               onPressed: () {},
             ),
           )),

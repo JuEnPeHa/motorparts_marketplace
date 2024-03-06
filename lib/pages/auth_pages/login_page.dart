@@ -265,8 +265,8 @@ class _BuildLoginBtn extends StatelessWidget {
           UserAuthFun.changeIndex(1, context);
         },
         style: ElevatedButton.styleFrom(
-          primary: Colors.white,
-          onPrimary: Colors.black,
+          // primary: Colors.white,
+          // onPrimary: Colors.black,
           shadowColor: Colors.black,
           elevation: 5,
           padding: const EdgeInsets.all(15.0),

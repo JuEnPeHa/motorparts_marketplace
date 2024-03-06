@@ -81,7 +81,7 @@ class Contact extends StatelessWidget {
                   width: 110,
                   child: TextButton(
                       style: TextButton.styleFrom(
-                        primary: Colors.white,
+                        // primary: Colors.white,
                         backgroundColor: const Color(0xff151534),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(25),

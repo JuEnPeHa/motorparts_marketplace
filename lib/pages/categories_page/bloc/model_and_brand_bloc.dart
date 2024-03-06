@@ -5,7 +5,7 @@ part 'model_and_brand_event.dart';
 part 'model_and_brand_state.dart';
 
 class ModelAndBrandBloc extends Bloc<ModelAndBrandEvent, ModelAndBrandState> {
-  ModelAndBrandBloc() : super(ModelAndBrandInitialState()) {
+  ModelAndBrandBloc() : super(const ModelAndBrandInitialState()) {
     on<ModelAndBrandEvent>((event, emit) {
       print('ModelAndBrandBloc: on<ModelAndBrandEvent>');
       print('ModelAndBrandBloc: event: $event');
