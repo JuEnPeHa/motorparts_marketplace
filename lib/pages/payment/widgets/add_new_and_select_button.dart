@@ -29,34 +29,38 @@ class AddNewAndSelectButton extends StatelessWidget {
           Expanded(
             flex: 1,
             child: CardContainer(
-              child: Container(
+              child: SizedBox(
                 height: 50,
                 width: double.infinity,
                 child: CupertinoButton(
                   onPressed: onPressedAddNewButton,
-                  child: Text(
-                    actualPageViewIndex == 1
-                        ? 'Add new Address'
-                        : 'Add new Payment Method',
+                  child: FittedBox(
+                    child: Text(
+                      actualPageViewIndex == 1
+                          ? 'Add new Address'
+                          : 'Add new Payment Method',
+                    ),
                   ),
                 ),
               ),
             ),
           ),
           lengthOfAddressesOrPaymentMethods == 0
-              ? SizedBox.shrink()
+              ? const SizedBox.shrink()
               : Expanded(
                   flex: 1,
                   child: CardContainer(
-                    child: Container(
+                    child: SizedBox(
                       height: 50,
                       width: double.infinity,
                       child: CupertinoButton(
                         onPressed: onPressedSelectButton,
-                        child: Text(
-                          actualPageViewIndex == 1
-                              ? 'Select Address'
-                              : 'Select Payment Method',
+                        child: FittedBox(
+                          child: Text(
+                            actualPageViewIndex == 1
+                                ? 'Select Address'
+                                : 'Select Payment Method',
+                          ),
                         ),
                       ),
                     ),

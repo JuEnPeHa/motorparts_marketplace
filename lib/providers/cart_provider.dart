@@ -16,7 +16,8 @@ class CartProvider extends ChangeNotifier {
     ),
     ItemInCart(
       id: "ndc8dsn",
-      name: "Otro artículo de prueba",
+      name:
+          "Otro artículo de prueba dinncdisdncdicndicndoicndicomcocmdocmconcojndo",
       image:
           "https://d3nv2arudvw7ln.cloudfront.net/images/global/777/715/diablo-superbike-technology-4505479678967.png",
       price: 932.99,
@@ -93,6 +94,8 @@ class CartProvider extends ChangeNotifier {
 
   double get totalPrice => _totalPrice();
 
+  static const int maxQuantity = 999;
+
   double _totalPrice() {
     double total = 0;
     for (var item in _items) {
@@ -106,10 +109,12 @@ class CartProvider extends ChangeNotifier {
   }
 
   void addItem(ItemInCart item) {
-    if (checkIfItemExists(item)) {
+    if (checkIfItemExists(item) && item.quantity < maxQuantity) {
       incrementQuantity(item);
-    } else {
+    } else if (!checkIfItemExists(item)) {
       _items.add(item);
+    } else {
+      throw Exception("The quantity of the item is at its maximum");
     }
     notifyListeners();
   }
@@ -117,7 +122,11 @@ class CartProvider extends ChangeNotifier {
   void incrementQuantity(ItemInCart item) {
     for (var itemInCart in _items) {
       if (itemInCart.id == item.id) {
-        itemInCart.quantity++;
+        if (itemInCart.quantity < maxQuantity) {
+          itemInCart.quantity++;
+        } else {
+          throw Exception("The quantity of the item is at its maximum");
+        }
       }
     }
     notifyListeners();

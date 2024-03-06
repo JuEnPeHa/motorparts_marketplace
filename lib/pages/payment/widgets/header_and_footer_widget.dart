@@ -91,36 +91,37 @@ class PaymentFooter extends StatelessWidget {
     // final String? address = null;
     // final String? card = null;
     return Container(
-        height: 100,
-        color: Theme.of(context).colorScheme.primary,
-        child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            mainAxisSize: MainAxisSize.max,
-            children: [
-              TextLineInPaymentFooter(
-                textTitle: 'Subtotal',
-                textValue: '\$$subtotal',
-              ),
-              TextLineInPaymentFooter(
-                textTitle: 'Shipping',
-                textValue: '\$$shipping',
-              ),
-              TextLineInPaymentFooter(
-                textTitle: 'Total',
-                textValue: '\$$total',
-              ),
-              address != null
-                  ? TextLineInPaymentFooter(
-                      textTitle: 'Address',
-                      textValue: address,
-                    )
-                  : SizedBox.shrink(),
-              card != null
-                  ? TextLineInPaymentFooter(
-                      textTitle: 'Card',
-                      textValue: card,
-                    )
-                  : SizedBox.shrink(),
-            ]));
+      height: 100,
+      color: Theme.of(context).colorScheme.primary,
+      child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          mainAxisSize: MainAxisSize.max,
+          children: [
+            TextLineInPaymentFooter(
+              textTitle: 'Subtotal',
+              textValue: '\$$subtotal',
+            ),
+            TextLineInPaymentFooter(
+              textTitle: 'Shipping',
+              textValue: '\$$shipping',
+            ),
+            TextLineInPaymentFooter(
+              textTitle: 'Total',
+              textValue: '\$$total',
+            ),
+            address != null
+                ? TextLineInPaymentFooter(
+                    textTitle: 'Address',
+                    textValue: address,
+                  )
+                : SizedBox.shrink(),
+            card != null
+                ? TextLineInPaymentFooter(
+                    textTitle: 'Card',
+                    textValue: card,
+                  )
+                : SizedBox.shrink(),
+          ]),
+    );
   }
 }
