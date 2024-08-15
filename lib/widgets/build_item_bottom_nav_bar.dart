@@ -14,7 +14,7 @@ class BuildNavItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final color = this.color ?? Theme.of(context).backgroundColor;
+    final color = this.color ?? Theme.of(context).scaffoldBackgroundColor;
     return ClipRRect(
       borderRadius: BorderRadius.circular(10),
       child: Padding(
