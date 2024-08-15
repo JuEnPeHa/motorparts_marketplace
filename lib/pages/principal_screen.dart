@@ -122,109 +122,171 @@ class PrincipalScreen extends StatelessWidget {
         SliverMostSelledWidget(
           brandRoute: Container(),
         ),
-        SliverGrid(
-          gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-            maxCrossAxisExtent: 300,
-            //mainAxisSpacing: 10,
-            //crossAxisSpacing: 10,
-            childAspectRatio: 1,
+        // SliverPadding(
+        //   padding: EdgeInsets.all(10),
+        //   sliver: SliverToBoxAdapter(
+        //     child: Container(
+        //       height: 200,
+        //       width: MediaQuery.of(context).size.width * 0.90,
+        //       decoration: BoxDecoration(
+        //         color: Theme.of(context).colorScheme.surfaceContainer,
+        //         borderRadius: BorderRadius.circular(15),
+        //       ),
+        //       child: Column(
+        //         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        //         children: [
+        //           Padding(
+        //             padding: const EdgeInsets.all(10),
+        //             child: Text(
+        //               'Artículos más vendidos',
+        //               style: TextStyle(
+        //                 fontSize: 20,
+        //                 fontWeight: FontWeight.bold,
+        //               ),
+        //             ),
+        //           ),
+        //           Expanded(
+        //             child: ListView.builder(
+        //               scrollDirection: Axis.horizontal,
+        //               itemCount: 10,
+        //               itemBuilder: (context, index) {
+        //                 return Padding(
+        //                   padding: const EdgeInsets.all(10),
+        //                   child: ClipRRect(
+        //                     borderRadius: BorderRadius.circular(15),
+        //                     child: Container(
+        //                       height: 100,
+        //                       width: 100,
+        //                       color: Theme.of(context)
+        //                           .colorScheme
+        //                           .surfaceContainer,
+        //                       child: Column(
+        //                         mainAxisAlignment:
+        //                             MainAxisAlignment.spaceBetween,
+        //                         children: [
+        //                           AspectRatio(
+        //                             aspectRatio: 3 / 2,
+        //                             child: _buildImage(index),
+        //                           ),
+        //                           Text(
+        //                             'Articulo $index',
+        //                             maxLines: 2,
+        //                             softWrap: true,
+        //                             overflow: TextOverflow.ellipsis,
+        //                           ),
+        //                           Text(
+        //                             'Precio del artículo \$$index',
+        //                             maxLines: 2,
+        //                             softWrap: true,
+        //                             overflow: TextOverflow.ellipsis,
+        //                           ),
+        //                         ],
+        //                       ),
+        //                     ),
+        //                   ),
+        //                 );
+        //               },
+        //             ),
+        //           ),
+        //         ],
+        //       ),
+        //     ),
+        //   ),
+        // ),
+        SliverPadding(
+          padding: EdgeInsets.symmetric(
+            horizontal: 10,
+            vertical: 10,
           ),
-          delegate: SliverChildBuilderDelegate(
-            (BuildContext context, int index) {
-              final String title = 'Articulo $index';
-              return Padding(
-                padding: const EdgeInsets.all(10.0),
-                child: ClipRRect(
-                  borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(15),
-                    topRight: Radius.circular(15),
-                    bottomLeft: Radius.circular(15),
-                    bottomRight: Radius.circular(15),
-                  ),
-                  child: InkWell(
-                    onTap: () {
-                      print('Tocaste la foto $index');
-                      Navigator.push(
-                        context,
-                        _isIOs()
-                            ? CupertinoPageRoute(
-                                builder: (context) => ArticleDetails(
-                                  isIOS: _isIOs(),
-                                  title: title,
-                                  api: '',
-                                  image: _buildImage(index),
-                                  price: index.toDouble(),
-                                  description: loremIpsum,
+          sliver: SliverGrid(
+            gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+              maxCrossAxisExtent: 300,
+              mainAxisSpacing: 10,
+              crossAxisSpacing: 10,
+              childAspectRatio: 1,
+            ),
+            delegate: SliverChildBuilderDelegate(
+              (BuildContext context, int index) {
+                final String title = 'Articulo $index';
+                return Padding(
+                  padding: const EdgeInsets.all(0.0),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(15),
+                      topRight: Radius.circular(15),
+                      bottomLeft: Radius.circular(15),
+                      bottomRight: Radius.circular(15),
+                    ),
+                    child: InkWell(
+                      onTap: () {
+                        print('Tocaste la foto $index');
+                        Navigator.push(
+                          context,
+                          _isIOs()
+                              ? CupertinoPageRoute(
+                                  builder: (context) => ArticleDetails(
+                                    isIOS: _isIOs(),
+                                    title: title,
+                                    api: '',
+                                    image: _buildImage(index),
+                                    price: index.toDouble(),
+                                    description: loremIpsum,
+                                  ),
+                                )
+                              : MaterialPageRoute(
+                                  builder: (context) => ArticleDetails(
+                                    isIOS: _isIOs(),
+                                    title: title,
+                                    api: '',
+                                    image: _buildImage(index),
+                                    price: index.toDouble(),
+                                    description: loremIpsum,
+                                  ),
                                 ),
-                              )
-                            : MaterialPageRoute(
-                                builder: (context) => ArticleDetails(
-                                  isIOS: _isIOs(),
-                                  title: title,
-                                  api: '',
-                                  image: _buildImage(index),
-                                  price: index.toDouble(),
-                                  description: loremIpsum,
-                                ),
-                              ),
-                      );
-                    },
-                    child: Container(
-                      alignment: Alignment.center,
-                      // color: Colors.white70,
-                      decoration: BoxDecoration(
-                        color: Theme.of(context).colorScheme.surfaceContainer,
-                        border: Border.all(
-                          color: Theme.of(context)
-                              .colorScheme
-                              .onSurface
-                              .withOpacity(0.50),
-                          width: 1,
+                        );
+                      },
+                      child: Container(
+                        alignment: Alignment.center,
+                        // color: Colors.white70,
+                        decoration: BoxDecoration(
+                          color: Theme.of(context).colorScheme.surfaceContainer,
+                          border: Border.all(
+                            color: Theme.of(context)
+                                .colorScheme
+                                .onSurface
+                                .withOpacity(0.50),
+                            width: 0.5,
+                          ),
+                          borderRadius: BorderRadius.circular(15),
                         ),
-                        borderRadius: BorderRadius.circular(15),
-                      ),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          // SizedBox(
-                          //   height: MediaQuery.of(context).size.width * 0.30,
-                          //   width: MediaQuery.of(context).size.width * 0.45,
-                          //   //width: MediaQuery.of(context).size.width / 2,
-                          //   child: _buildImage(index),
-                          // ),
-                          // ConstrainedBox(
-                          //   constraints: BoxConstraints(
-                          //     maxHeight:
-                          //         MediaQuery.of(context).size.width * 0.30,
-                          //     maxWidth:
-                          //         MediaQuery.of(context).size.width * 0.45,
-                          //   ),
-                          //   child: _buildImage(index),
-                          // ),
-                          AspectRatio(
-                            aspectRatio: 3 / 2,
-                            child: _buildImage(index),
-                          ),
-                          Text(
-                            title,
-                            maxLines: 2,
-                            softWrap: true,
-                            overflow: TextOverflow.ellipsis,
-                          ),
-                          Text(
-                            'Precio del artículo \$$index',
-                            maxLines: 2,
-                            softWrap: true,
-                            overflow: TextOverflow.ellipsis,
-                          ),
-                        ],
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            AspectRatio(
+                              aspectRatio: 3 / 2,
+                              child: _buildImage(index),
+                            ),
+                            Text(
+                              title,
+                              maxLines: 2,
+                              softWrap: true,
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                            Text(
+                              'Precio del artículo \$$index',
+                              maxLines: 2,
+                              softWrap: true,
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                   ),
-                ),
-              );
-            },
-            childCount: 25,
+                );
+              },
+              childCount: 25,
+            ),
           ),
         ),
       ],
