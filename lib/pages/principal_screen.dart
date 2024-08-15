@@ -136,10 +136,11 @@ class PrincipalScreen extends StatelessWidget {
                 padding: const EdgeInsets.all(10.0),
                 child: ClipRRect(
                   borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(15),
-                      topRight: Radius.circular(15),
-                      bottomLeft: Radius.circular(0),
-                      bottomRight: Radius.circular(0)),
+                    topLeft: Radius.circular(15),
+                    topRight: Radius.circular(15),
+                    bottomLeft: Radius.circular(15),
+                    bottomRight: Radius.circular(15),
+                  ),
                   child: InkWell(
                     onTap: () {
                       print('Tocaste la foto $index');
@@ -170,18 +171,38 @@ class PrincipalScreen extends StatelessWidget {
                     },
                     child: Container(
                       alignment: Alignment.center,
-                      color: Colors.white70,
-                      // Theme.of(context)
-                      //     .cardColor
-                      //     .withOpacity(0.125)
-                      //     .withGreen(0),
+                      // color: Colors.white70,
+                      decoration: BoxDecoration(
+                        color: Theme.of(context).colorScheme.surfaceContainer,
+                        border: Border.all(
+                          color: Theme.of(context)
+                              .colorScheme
+                              .onSurface
+                              .withOpacity(0.50),
+                          width: 1,
+                        ),
+                        borderRadius: BorderRadius.circular(15),
+                      ),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          SizedBox(
-                            height: MediaQuery.of(context).size.width * 0.30,
-                            width: MediaQuery.of(context).size.width * 0.45,
-                            //width: MediaQuery.of(context).size.width / 2,
+                          // SizedBox(
+                          //   height: MediaQuery.of(context).size.width * 0.30,
+                          //   width: MediaQuery.of(context).size.width * 0.45,
+                          //   //width: MediaQuery.of(context).size.width / 2,
+                          //   child: _buildImage(index),
+                          // ),
+                          // ConstrainedBox(
+                          //   constraints: BoxConstraints(
+                          //     maxHeight:
+                          //         MediaQuery.of(context).size.width * 0.30,
+                          //     maxWidth:
+                          //         MediaQuery.of(context).size.width * 0.45,
+                          //   ),
+                          //   child: _buildImage(index),
+                          // ),
+                          AspectRatio(
+                            aspectRatio: 3 / 2,
                             child: _buildImage(index),
                           ),
                           Text(
